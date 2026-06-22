@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Referrer Test</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 16px;
+      font-family: Arial, sans-serif;
+      background: #1F3864;
+      color: #ffffff;
+    }
+    #result {
+      font-family: monospace;
+      font-size: 13px;
+      background: #102040;
+      padding: 12px;
+      border-radius: 6px;
+      word-break: break-all;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h3>document.referrer test</h3>
+  <div id="result">Checking…</div>
+
+  <script>
+    const ref = document.referrer;
+    const out = document.getElementById('result');
+
+    if (!ref) {
+      out.textContent = 'EMPTY — document.referrer returned nothing.\n\nThis means the browser is blocking/stripping the referrer, and we cannot rely on this approach.';
+    } else {
+      out.textContent = 'document.referrer = ' + ref;
+    }
+  </script>
+</body>
+</html>
