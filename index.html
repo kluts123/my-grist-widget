@@ -1,40 +1,661 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Referrer Test</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 16px;
-      font-family: Arial, sans-serif;
-      background: #1F3864;
-      color: #ffffff;
-    }
-    #result {
-      font-family: monospace;
-      font-size: 13px;
-      background: #102040;
-      padding: 12px;
-      border-radius: 6px;
-      word-break: break-all;
-      white-space: pre-wrap;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimeTime - Plant Engineering Portfolio Operating System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#243f72;
+    --primary-light:#357ABD;
+    --accent:#2b84d6;
+    --bg:#f4f6f9;
+    --text:#23313f;
+    --muted:#6b7785;
+    --white:#ffffff;
+    --success:#27ae60;
+    --danger:#d9534f;
+    --shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.6;
+}
+
+.container{
+    width:90%;
+    max-width:1280px;
+    margin:auto;
+}
+
+header{
+    background:var(--primary);
+    color:white;
+    padding:20px 0;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#78b6ff;
+}
+
+nav ul{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+}
+
+.hero{
+    background:linear-gradient(rgba(36,63,114,.93),rgba(36,63,114,.93)),
+               url('YOUR-HERO-IMAGE.jpg');
+    color:white;
+    padding:120px 0;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:60px;
+    align-items:center;
+}
+
+.hero h1{
+    font-size:58px;
+    line-height:1.1;
+    margin-bottom:25px;
+}
+
+.hero p{
+    font-size:20px;
+    opacity:.95;
+    margin-bottom:35px;
+}
+
+.btn{
+    display:inline-block;
+    padding:16px 30px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.2s;
+}
+
+.btn-primary{
+    background:var(--accent);
+    color:white;
+}
+
+.btn-secondary{
+    background:white;
+    color:var(--primary);
+    margin-left:15px;
+}
+
+.hero-card{
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(8px);
+    border-radius:14px;
+    padding:35px;
+}
+
+.metric{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.metric span:last-child{
+    font-weight:700;
+}
+
+section{
+    padding:90px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.section-title h2{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.section-title p{
+    color:var(--muted);
+    max-width:800px;
+    margin:auto;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    padding:35px;
+    border-radius:14px;
+    box-shadow:var(--shadow);
+}
+
+.card h3{
+    margin:20px 0 15px;
+}
+
+.icon{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#edf4ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+.dark-section{
+    background:var(--primary);
+    color:white;
+}
+
+.dark-section .card{
+    background:rgba(255,255,255,.08);
+    color:white;
+}
+
+.benefits{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.benefit{
+    background:white;
+    text-align:center;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:var(--shadow);
+}
+
+.benefit h3{
+    font-size:42px;
+    color:var(--primary);
+}
+
+.modules{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:30px;
+}
+
+.module{
+    background:white;
+    border-left:6px solid var(--primary);
+    padding:30px;
+    border-radius:12px;
+    box-shadow:var(--shadow);
+}
+
+.module ul{
+    margin-top:15px;
+    padding-left:20px;
+}
+
+.cta{
+    background:linear-gradient(135deg,var(--primary),#1d2f55);
+    color:white;
+    text-align:center;
+    padding:90px 0;
+}
+
+.cta h2{
+    font-size:44px;
+    margin-bottom:20px;
+}
+
+footer{
+    background:#16233e;
+    color:white;
+    padding:60px 0;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:40px;
+}
+
+footer ul{
+    list-style:none;
+}
+
+footer li{
+    margin-bottom:10px;
+}
+
+footer a{
+    color:#cbd4df;
+    text-decoration:none;
+}
+
+@media(max-width:900px){
+
+.hero-grid{
+    grid-template-columns:1fr;
+}
+
+.hero h1{
+    font-size:42px;
+}
+
+.benefits{
+    grid-template-columns:1fr 1fr;
+}
+
+.footer-grid{
+    grid-template-columns:1fr 1fr;
+}
+
+nav ul{
+    display:none;
+}
+}
+
+</style>
 </head>
+
 <body>
-  <h3>document.referrer test</h3>
-  <div id="result">Checking…</div>
 
-  <script>
-    const ref = document.referrer;
-    const out = document.getElementById('result');
+<header>
+<div class="container">
+<nav>
 
-    if (!ref) {
-      out.textContent = 'EMPTY — document.referrer returned nothing.\n\nThis means the browser is blocking/stripping the referrer, and we cannot rely on this approach.';
-    } else {
-      out.textContent = 'document.referrer = ' + ref;
-    }
-  </script>
+<div class="logo">
+Prime<span>Time</span>
+</div>
+
+<ul>
+<li><a href="#features">Features</a></li>
+<li><a href="#modules">Modules</a></li>
+<li><a href="#benefits">Benefits</a></li>
+<li><a href="#resources">Resources</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="container">
+
+<div class="hero-grid">
+
+<div>
+
+<h1>
+The Plant Engineering Portfolio Operating System
+</h1>
+
+<p>
+Bring project portfolios, PAR governance, MOC management, actions, procurement follow-up and engineering readiness together in one integrated cloud platform.
+</p>
+
+<a class="btn btn-primary" href="#">
+Request a Live Demonstration
+</a>
+
+<a class="btn btn-secondary" href="#">
+Download Brochure
+</a>
+
+</div>
+
+<div class="hero-card">
+
+<h3>Typical Results</h3>
+
+<div class="metric">
+<span>Portfolio Visibility</span>
+<span>100%</span>
+</div>
+
+<div class="metric">
+<span>Admin Reduction</span>
+<span>10+ hrs/week</span>
+</div>
+
+<div class="metric">
+<span>Spreadsheet Reduction</span>
+<span>3-5 files eliminated</span>
+</div>
+
+<div class="metric">
+<span>Projects Supported</span>
+<span>100+ / year</span>
+</div>
+
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="features">
+
+<div class="container">
+
+<div class="section-title">
+<h2>Designed for Industrial Site Engineering Teams</h2>
+
+<p>
+PrimeTime replaces disconnected spreadsheets, action trackers and portfolio reports with one real-time source of truth for capital project delivery.
+</p>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<div class="icon">📊</div>
+<h3>Portfolio Visibility</h3>
+<p>
+Instantly identify red projects, forecast CAPEX spend, monitor portfolio health and track engineering readiness across all projects.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🚦</div>
+<h3>PAR & Stage-Gate Governance</h3>
+<p>
+Standardize FEL and stage-gate reviews with checklists, deliverables, approvals and readiness scoring.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🔄</div>
+<h3>MOC Integration</h3>
+<p>
+Connect projects directly to Management of Change records, approvals and follow-up actions.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">✅</div>
+<h3>Action Management</h3>
+<p>
+Ensure accountability with centralized action tracking linked to projects, gates, MOCs and meetings.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">📦</div>
+<h3>Procurement Follow-Up</h3>
+<p>
+Track critical equipment deliveries, vendor commitments and expediting requirements.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">📁</div>
+<h3>Engineering Document Register</h3>
+<p>
+Maintain visibility over P&IDs, HAZOP reports, datasheets and engineering deliverables.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="dark-section" id="modules">
+
+<div class="container">
+
+<div class="section-title">
+<h2>Core Product Modules</h2>
+<p>Built specifically for owner-operated industrial sites.</p>
+</div>
+
+<div class="modules">
+
+<div class="module">
+<h3>Portfolio Management</h3>
+<ul>
+<li>Portfolio dashboards</li>
+<li>CAPEX forecasting</li>
+<li>RAG monitoring</li>
+<li>Project prioritization</li>
+</ul>
+</div>
+
+<div class="module">
+<h3>PAR & Gate Reviews</h3>
+<ul>
+<li>FEL1 / FEL2 / FEL3 governance</li>
+<li>Gate readiness assessments</li>
+<li>Approval workflows</li>
+<li>Deliverable compliance</li>
+</ul>
+</div>
+
+<div class="module">
+<h3>Project Controls</h3>
+<ul>
+<li>Budget vs Forecast</li>
+<li>Milestone tracking</li>
+<li>Resource visibility</li>
+<li>Progress dashboards</li>
+</ul>
+</div>
+
+<div class="module">
+<h3>Change & MOC Management</h3>
+<ul>
+<li>MOC linkage</li>
+<li>Approval tracking</li>
+<li>Open actions</li>
+<li>Audit trail</li>
+</ul>
+</div>
+
+<div class="module">
+<h3>Action & Risk Management</h3>
+<ul>
+<li>Action registers</li>
+<li>Risk registers</li>
+<li>Ownership & due dates</li>
+<li>Automated reminders</li>
+</ul>
+</div>
+
+<div class="module">
+<h3>Engineering Documentation</h3>
+<ul>
+<li>Document register</li>
+<li>Revision tracking</li>
+<li>Deliverable status</li>
+<li>Project evidence management</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section id="benefits">
+
+<div class="container">
+
+<div class="section-title">
+<h2>Why Organizations Choose PrimeTime</h2>
+</div>
+
+<div class="benefits">
+
+<div class="benefit">
+<h3>1</h3>
+<p>Single source of truth for all site projects.</p>
+</div>
+
+<div class="benefit">
+<h3>2</h3>
+<p>Reduce manual reporting and spreadsheet administration.</p>
+</div>
+
+<div class="benefit">
+<h3>3</h3>
+<p>Improve governance and project readiness.</p>
+</div>
+
+<div class="benefit">
+<h3>4</h3>
+<p>Increase portfolio transparency and decision quality.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+<h2>Useful Resources</h2>
+<p>Replace these placeholders with your final links.</p>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>📄 Product Brochure</h3>
+<p>Download a detailed product overview.</p>
+<a href="#">[BROCHURE LINK]</a>
+</div>
+
+<div class="card">
+<h3>🎥 Product Demonstration</h3>
+<p>Watch the software in action.</p>
+<a href="#">[DEMO VIDEO LINK]</a>
+</div>
+
+<div class="card">
+<h3>📚 Documentation</h3>
+<p>Explore detailed functional documentation.</p>
+<a href="#">[DOCUMENTATION LINK]</a>
+</div>
+
+<div class="card">
+<h3>📰 Customer Stories</h3>
+<p>Read implementation examples and success stories.</p>
+<a href="#">[CASE STUDY LINK]</a>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="cta" id="contact">
+
+<div class="container">
+
+<h2>Ready to Bring Control Back to Your Project Portfolio?</h2>
+
+<p style="margin-bottom:35px;">
+Request a demonstration and discover how PrimeTime can support your engineering organization.
+</p>
+
+<a class="btn btn-primary" href="#">
+Book a Demonstration
+</a>
+
+</div>
+</section>
+
+<footer>
+
+<div class="container">
+
+<div class="footer-grid">
+
+<div>
+<h3>PrimeTime</h3>
+<p>
+Plant Engineering Portfolio Operating System.
+</p>
+</div>
+
+<div>
+<h3>Product</h3>
+<ul>
+<li><a href="#">Features</a></li>
+<li><a href="#">Pricing</a></li>
+<li><a href="#">Roadmap</a></li>
+</ul>
+</div>
+
+<div>
+<h3>Resources</h3>
+<ul>
+<li><a href="#">Documentation</a></li>
+<li><a href="#">Release Notes</a></li>
+<li><a href="#">Knowledge Base</a></li>
+</ul>
+</div>
+
+<div>
+<h3>Contact</h3>
+<ul>
+<li><a href="#">sales@yourcompany.com</a></li>
+<li><a href="#">LinkedIn</a></li>
+<li><a href="#">Request Demo</a></li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
 </body>
 </html>
