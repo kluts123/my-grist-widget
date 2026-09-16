@@ -4,676 +4,1065 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CINCOMETRIC — Engineering Project Portfolio Management</title>
+<title>CINCOMETRIC — Project Portfolio Management for Engineering</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="description"
+      content="CINCOMETRIC is a practical project portfolio cockpit for engineering and technical managers managing CAPEX, projects and resources across industrial sites.">
 
 <style>
 
-:root{
-    --primary:#0F7B51;
-    --primary-dark:#075A3C;
-    --primary-light:#39A875;
+:root {
+    --green-dark: #035c3a;
+    --green: #148356;
+    --green-mid: #299d71;
+    --green-light: #5fc9a4;
+    --green-pale: #a3e2ca;
 
-    --blue:#4E97DE;
-    --blue-light:#99D9F7;
+    --text: #17342a;
+    --muted: #64756e;
+    --light: #f4f8f6;
+    --border: #dfe9e4;
 
-    --orange:#DC9758;
-    --yellow:#F7D99F;
-
-    --bg:#F5F7F6;
-    --bg-soft:#EEF5F1;
-
-    --text:#262633;
-    --muted:#69727A;
-
-    --white:#FFFFFF;
-
-    --border:#DCE5E0;
-
-    --shadow:0 8px 30px rgba(38,38,51,.08);
-    --shadow-hover:0 14px 38px rgba(38,38,51,.13);
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:'Inter',sans-serif;
-    color:var(--text);
-    background:var(--bg);
-    line-height:1.6;
-}
-
-.container{
-    width:90%;
-    max-width:1280px;
-    margin:auto;
+    --max-width: 1180px;
 }
 
 /* =========================================================
-   HEADER
-========================================================= */
+   RESET
+   ========================================================= */
 
-header{
-    background:var(--white);
-    color:var(--text);
-    padding:14px 0;
-    position:sticky;
-    top:0;
-    z-index:100;
-    border-bottom:1px solid var(--border);
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:30px;
+html {
+    scroll-behavior: smooth;
 }
 
-/* Logo */
+body {
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 
-.brand{
-    display:flex;
-    align-items:center;
-    text-decoration:none;
+    color: var(--text);
+    background: #ffffff;
+    line-height: 1.55;
 }
 
-.brand img{
-    width:155px;
-    height:auto;
-    display:block;
+img {
+    max-width: 100%;
+    display: block;
 }
 
-/* Navigation */
-
-nav ul{
-    display:flex;
-    gap:30px;
-    list-style:none;
-    align-items:center;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-nav a{
-    color:var(--text);
-    text-decoration:none;
-    font-weight:500;
-    font-size:14px;
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.container {
+    width: min(var(--max-width), calc(100% - 48px));
+    margin: 0 auto;
 }
 
-nav a:hover{
-    color:var(--primary);
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    height: 76px;
+
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(14px);
+
+    border-bottom: 1px solid rgba(3,92,58,0.08);
 }
 
-/* Language */
+.nav-inner {
+    height: 100%;
 
-.language-select{
-    border:1px solid var(--border);
-    background:white;
-    color:var(--text);
-    padding:8px 11px;
-    border-radius:7px;
-    font-family:inherit;
-    font-size:13px;
-    cursor:pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.language-select:focus{
-    outline:2px solid rgba(15,123,81,.2);
+.nav-logo {
+    width: 138px;
+    height: auto;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #40574e;
+}
+
+.nav-links a {
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--green);
+}
+
+.nav-button {
+    padding: 10px 19px;
+
+    border-radius: 7px;
+
+    background: var(--green-dark);
+    color: white;
+
+    font-size: 14px;
+    font-weight: 650;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.nav-button:hover {
+    background: var(--green);
+    transform: translateY(-1px);
 }
 
 /* =========================================================
    HERO
-========================================================= */
+   ========================================================= */
 
-.hero{
+.hero {
+    padding: 88px 0 92px;
+
     background:
-        radial-gradient(circle at 85% 20%, rgba(153,217,247,.20), transparent 28%),
-        linear-gradient(135deg,#075A3C,#0F7B51);
-    color:white;
-    padding:105px 0 115px;
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(95,201,164,0.13),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #f8fbf9 0%,
+            #ffffff 100%
+        );
 }
 
-.hero-grid{
-    display:grid;
-    grid-template-columns:1.15fr .85fr;
-    gap:70px;
-    align-items:center;
-}
+.hero-grid {
+    display: grid;
 
-.hero h1{
-    font-size:56px;
-    line-height:1.08;
-    margin-bottom:25px;
-    letter-spacing:-1.5px;
-}
+    grid-template-columns:
+        minmax(0, 0.95fr)
+        minmax(0, 1.05fr);
 
-.hero h1 span{
-    color:var(--blue-light);
-}
+    gap: 72px;
 
-.hero p{
-    font-size:19px;
-    line-height:1.7;
-    opacity:.94;
-    margin-bottom:30px;
-    max-width:720px;
-}
-
-.hero-kicker{
-    display:inline-block;
-    font-size:13px;
-    font-weight:700;
-    letter-spacing:1.8px;
-    text-transform:uppercase;
-    color:var(--blue-light);
-    margin-bottom:18px;
-}
-
-/* Hero logo card */
-
-.hero-card{
-    background:rgba(255,255,255,.96);
-    border-radius:18px;
-    padding:38px;
-    box-shadow:0 20px 60px rgba(0,0,0,.18);
-    color:var(--text);
-}
-
-.hero-card img{
-    width:100%;
-    max-width:390px;
-    display:block;
-    margin:0 auto 25px;
-}
-
-.hero-card h3{
-    font-size:20px;
-    margin-bottom:12px;
-}
-
-.hero-card p{
-    font-size:15px;
-    color:var(--muted);
-    margin:0;
+    align-items: center;
 }
 
 /* =========================================================
-   BUTTONS
-========================================================= */
+   HERO COPY
+   ========================================================= */
 
-.btn{
-    display:inline-block;
-    padding:14px 24px;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:600;
-    transition:.2s;
-    font-size:14px;
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 22px;
+
+    color: var(--green);
+    font-size: 13px;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
-.btn-primary{
-    background:var(--blue-light);
-    color:var(--text);
+.eyebrow::before {
+    content: "";
+
+    width: 28px;
+    height: 2px;
+
+    background: var(--green);
 }
 
-.btn-primary:hover{
-    transform:translateY(-2px);
-    box-shadow:0 7px 20px rgba(0,0,0,.15);
+.hero h1 {
+    max-width: 620px;
+
+    font-size: clamp(42px, 5vw, 66px);
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+
+    margin-bottom: 27px;
 }
 
-.btn-secondary{
-    background:transparent;
-    color:white;
-    border:1px solid rgba(255,255,255,.45);
-    margin-left:10px;
+.hero h1 span {
+    color: var(--green);
 }
 
-.btn-secondary:hover{
-    background:rgba(255,255,255,.1);
+.hero-text {
+    max-width: 570px;
+
+    color: var(--muted);
+
+    font-size: 19px;
+    line-height: 1.65;
+
+    margin-bottom: 34px;
 }
 
-/* =========================================================
-   GENERAL SECTIONS
-========================================================= */
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
 
-section{
-    padding:90px 0;
+    margin-bottom: 35px;
 }
 
-.section-title{
-    text-align:center;
-    margin-bottom:55px;
+.button-primary {
+    padding: 13px 22px;
+
+    border-radius: 7px;
+
+    background: var(--green-dark);
+    color: white;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
-.section-title h2{
-    font-size:40px;
-    line-height:1.2;
-    margin-bottom:15px;
-    letter-spacing:-.7px;
+.button-primary:hover {
+    background: var(--green);
+    transform: translateY(-1px);
 }
 
-.section-title p{
-    color:var(--muted);
-    max-width:800px;
-    margin:auto;
+.button-secondary {
+    padding: 12px 20px;
+
+    border: 1px solid var(--border);
+    border-radius: 7px;
+
+    color: var(--green-dark);
+
+    font-size: 15px;
+    font-weight: 650;
+
+    background: white;
+
+    transition:
+        border 0.2s ease,
+        background 0.2s ease;
 }
 
-/* =========================================================
-   AUDIENCE
-========================================================= */
-
-.audience{
-    background:white;
+.button-secondary:hover {
+    border-color: var(--green-light);
+    background: #f7fbf9;
 }
 
-.audience-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:55px;
-    align-items:center;
+.hero-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #73847d;
+
+    font-size: 13px;
 }
 
-.audience-copy h2{
-    font-size:40px;
-    line-height:1.2;
-    margin-bottom:20px;
-}
+.hero-note-dot {
+    width: 8px;
+    height: 8px;
 
-.audience-copy p{
-    color:var(--muted);
-    margin-bottom:18px;
-}
+    border-radius: 50%;
 
-.audience-list{
-    list-style:none;
-    margin-top:25px;
-}
-
-.audience-list li{
-    padding:12px 0 12px 32px;
-    position:relative;
-    border-bottom:1px solid var(--border);
-}
-
-.audience-list li::before{
-    content:"";
-    position:absolute;
-    left:0;
-    top:18px;
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:var(--primary);
-}
-
-/* Audience card */
-
-.audience-card{
-    background:var(--bg-soft);
-    border-radius:18px;
-    padding:38px;
-    border-left:5px solid var(--primary);
-}
-
-.audience-card h3{
-    margin-bottom:18px;
-    font-size:23px;
-}
-
-.audience-card p{
-    color:var(--muted);
-    margin-bottom:15px;
+    background: var(--green);
 }
 
 /* =========================================================
-   FEATURES
-========================================================= */
+   HERO PHOTO MONTAGE
+   ========================================================= */
 
-.features{
-    background:var(--bg);
+.hero-visual {
+    position: relative;
 }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:28px;
+.photo-grid {
+    display: grid;
+
+    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-rows: 210px 210px;
+
+    gap: 13px;
+
+    transform: rotate(0.2deg);
 }
 
-.card{
-    background:white;
-    padding:32px;
-    border-radius:14px;
-    box-shadow:var(--shadow);
-    transition:.2s;
+.photo {
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dcebe5,
+            #eef4f1
+        );
+
+    border: 1px solid rgba(3,92,58,0.10);
+
+    box-shadow:
+        0 18px 45px rgba(3,92,58,0.10);
 }
 
-.card:hover{
-    transform:translateY(-3px);
-    box-shadow:var(--shadow-hover);
+.photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.5s ease;
 }
 
-.icon{
-    width:54px;
-    height:54px;
-    border-radius:12px;
-    background:#E6F4EE;
-    color:var(--primary);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:25px;
-    margin-bottom:20px;
+.photo:hover img {
+    transform: scale(1.035);
 }
 
-.card h3{
-    margin-bottom:12px;
-    font-size:20px;
+/*
+    PHOTO PLACEHOLDERS
+
+    Replace these files with your preferred photography:
+
+    01 = chemical / process industry / industrial plant
+    02 = energy / utilities / renewable energy
+    03 = water / environment / waste treatment
+    04 = manufacturing / production facility
+
+    The styling remains unchanged when you replace the images.
+*/
+
+.photo-process {
+    grid-row: span 2;
 }
 
-.card p{
-    color:var(--muted);
-    font-size:15px;
+.photo-energy {
+    grid-column: 2;
 }
 
-/* =========================================================
-   MODULES
-========================================================= */
-
-.dark-section{
-    background:var(--text);
-    color:white;
+.photo-water {
+    grid-column: 2;
 }
 
-.dark-section .section-title p{
-    color:#BFC5CB;
-}
+.photo-label {
+    position: absolute;
 
-.modules{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:25px;
-}
+    left: 15px;
+    bottom: 15px;
 
-.module{
-    background:#30303C;
-    border-left:4px solid var(--primary-light);
-    padding:30px;
-    border-radius:10px;
-}
+    padding: 7px 11px;
 
-.module h3{
-    margin-bottom:15px;
-}
+    border-radius: 5px;
 
-.module ul{
-    margin-top:10px;
-    padding-left:20px;
-    color:#C9CED3;
-}
+    background: rgba(3,92,58,0.88);
+    color: white;
 
-.module li{
-    margin-bottom:7px;
-}
+    font-size: 11px;
+    font-weight: 700;
 
-/* =========================================================
-   GOLDEN RULES / PRINCIPLES
-========================================================= */
-
-.principles{
-    background:white;
-}
-
-.principles-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:24px;
-}
-
-.principle{
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:28px;
-    background:white;
-}
-
-.principle-number{
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    background:var(--primary);
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:700;
-    margin-bottom:16px;
-}
-
-.principle h3{
-    font-size:18px;
-    margin-bottom:9px;
-}
-
-.principle p{
-    color:var(--muted);
-    font-size:14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
 /* =========================================================
-   MULTI-SITE
-========================================================= */
+   POSITIONING STRIP
+   ========================================================= */
 
-.multi-site{
-    background:var(--bg-soft);
+.positioning {
+    padding: 25px 0;
+
+    background: var(--green-dark);
+
+    color: white;
 }
 
-.multi-site-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:25px;
+.positioning-inner {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 30px;
+
+    align-items: center;
 }
 
-.site-card{
-    background:white;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:var(--shadow);
+.position-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    font-size: 14px;
+    font-weight: 600;
 }
 
-.site-card h3{
-    margin-bottom:12px;
-}
+.position-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.site-card p{
-    color:var(--muted);
-    font-size:15px;
+    width: 34px;
+    height: 34px;
+
+    border-radius: 7px;
+
+    background: rgba(255,255,255,0.12);
+
+    font-size: 16px;
 }
 
 /* =========================================================
-   FUTURE PRODUCT
-========================================================= */
+   GENERAL SECTION
+   ========================================================= */
 
-.future{
-    background:white;
+.section {
+    padding: 105px 0;
 }
 
-.future-box{
-    max-width:950px;
-    margin:auto;
-    text-align:center;
-    background:linear-gradient(135deg,#EAF5F0,#F5FAFD);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:55px;
+.section-light {
+    background: var(--light);
 }
 
-.future-box h2{
-    font-size:38px;
-    margin-bottom:18px;
+.section-heading {
+    max-width: 730px;
+
+    margin-bottom: 55px;
 }
 
-.future-box p{
-    color:var(--muted);
-    max-width:760px;
-    margin:0 auto 20px;
+.section-heading.center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.section-kicker {
+    margin-bottom: 12px;
+
+    color: var(--green);
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    margin-bottom: 18px;
+
+    font-size: clamp(32px, 4vw, 46px);
+    line-height: 1.12;
+
+    letter-spacing: -0.035em;
+}
+
+.section-heading p {
+    color: var(--muted);
+
+    font-size: 17px;
+    line-height: 1.65;
+}
+
+/* =========================================================
+   PRODUCT FEATURES
+   ========================================================= */
+
+.feature-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.feature-card {
+    padding: 29px;
+
+    border: 1px solid var(--border);
+    border-radius: 11px;
+
+    background: white;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 16px 35px rgba(3,92,58,0.09);
+}
+
+.feature-number {
+    margin-bottom: 22px;
+
+    color: var(--green-light);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.feature-card h3 {
+    margin-bottom: 12px;
+
+    font-size: 20px;
+    letter-spacing: -0.015em;
+}
+
+.feature-card p {
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+/* =========================================================
+   INDUSTRIES
+   ========================================================= */
+
+.industry-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 17px;
+}
+
+.industry-card {
+    position: relative;
+
+    min-height: 250px;
+
+    overflow: hidden;
+
+    border-radius: 11px;
+
+    background: #edf5f1;
+}
+
+.industry-card img {
+    width: 100%;
+    height: 100%;
+
+    min-height: 250px;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.5s ease;
+}
+
+.industry-card:hover img {
+    transform: scale(1.04);
+}
+
+.industry-overlay {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    padding: 22px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(3,34,23,0.82),
+            rgba(3,34,23,0.08) 65%
+        );
+
+    color: white;
+}
+
+.industry-overlay h3 {
+    margin-bottom: 5px;
+
+    font-size: 18px;
+}
+
+.industry-overlay p {
+    max-width: 220px;
+
+    color: rgba(255,255,255,0.78);
+
+    font-size: 12px;
+}
+
+/* =========================================================
+   DASHBOARD SECTION
+   ========================================================= */
+
+.dashboard-section {
+    padding: 105px 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f6faf8,
+            #edf5f1
+        );
+}
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        0.85fr
+        1.15fr;
+
+    gap: 70px;
+
+    align-items: center;
+}
+
+.dashboard-copy h2 {
+    margin-bottom: 19px;
+
+    font-size: clamp(32px, 4vw, 45px);
+    line-height: 1.12;
+
+    letter-spacing: -0.035em;
+}
+
+.dashboard-copy p {
+    margin-bottom: 25px;
+
+    color: var(--muted);
+
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.dashboard-list {
+    display: grid;
+    gap: 12px;
+}
+
+.dashboard-list-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.dashboard-list-item::before {
+    content: "";
+
+    width: 7px;
+    height: 7px;
+
+    flex: 0 0 auto;
+
+    border-radius: 50%;
+
+    background: var(--green);
+}
+
+/* =========================================================
+   DASHBOARD MOCKUP
+   ========================================================= */
+
+.dashboard-mockup {
+    padding: 20px;
+
+    border: 1px solid #d7e4de;
+    border-radius: 13px;
+
+    background: white;
+
+    box-shadow:
+        0 25px 55px rgba(3,92,58,0.12);
+}
+
+.dashboard-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 16px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.dashboard-title {
+    font-size: 13px;
+    font-weight: 750;
+}
+
+.dashboard-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: var(--green);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.dashboard-status::before {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--green);
+}
+
+.dashboard-kpis {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin: 17px 0;
+}
+
+.kpi {
+    padding: 13px;
+
+    border-radius: 7px;
+
+    background: #f5f9f7;
+}
+
+.kpi-label {
+    color: #788981;
+
+    font-size: 9px;
+    text-transform: uppercase;
+
+    letter-spacing: 0.04em;
+}
+
+.kpi-value {
+    margin-top: 4px;
+
+    color: var(--green-dark);
+
+    font-size: 21px;
+    font-weight: 750;
+}
+
+.dashboard-chart {
+    height: 180px;
+
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+
+    padding: 17px;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f9fbfa,
+            #f1f6f3
+        );
+}
+
+.chart-bar {
+    flex: 1;
+
+    min-width: 10px;
+
+    border-radius: 3px 3px 0 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--green-light),
+            var(--green-dark)
+        );
+}
+
+.bar-1 { height: 38%; }
+.bar-2 { height: 52%; }
+.bar-3 { height: 45%; }
+.bar-4 { height: 67%; }
+.bar-5 { height: 59%; }
+.bar-6 { height: 76%; }
+.bar-7 { height: 72%; }
+.bar-8 { height: 87%; }
+.bar-9 { height: 81%; }
+.bar-10 { height: 93%; }
+
+/* =========================================================
+   GOLDEN RULES
+   ========================================================= */
+
+.rules {
+    padding: 90px 0;
+}
+
+.rules-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 40px;
+}
+
+.rule {
+    border-left: 2px solid var(--green-light);
+
+    padding-left: 20px;
+}
+
+.rule h3 {
+    margin-bottom: 8px;
+
+    font-size: 17px;
+}
+
+.rule p {
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.65;
 }
 
 /* =========================================================
    CTA
-========================================================= */
+   ========================================================= */
 
-.cta{
-    background:linear-gradient(135deg,var(--primary-dark),var(--primary));
-    color:white;
-    text-align:center;
-    padding:85px 0;
+.cta {
+    padding: 90px 0;
+
+    background: var(--green-dark);
+
+    color: white;
 }
 
-.cta h2{
-    font-size:42px;
-    line-height:1.2;
-    margin-bottom:18px;
+.cta-inner {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 50px;
 }
 
-.cta p{
-    max-width:700px;
-    margin:0 auto 30px;
-    opacity:.9;
+.cta h2 {
+    max-width: 650px;
+
+    font-size: clamp(30px, 4vw, 45px);
+    line-height: 1.12;
+
+    letter-spacing: -0.035em;
+}
+
+.cta p {
+    max-width: 600px;
+
+    margin-top: 14px;
+
+    color: rgba(255,255,255,0.72);
+
+    font-size: 16px;
+}
+
+.cta-button {
+    flex: 0 0 auto;
+
+    padding: 14px 23px;
+
+    border-radius: 7px;
+
+    background: white;
+    color: var(--green-dark);
+
+    font-size: 14px;
+    font-weight: 750;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.cta-button:hover {
+    background: #f2f8f5;
+
+    transform: translateY(-2px);
 }
 
 /* =========================================================
    FOOTER
-========================================================= */
+   ========================================================= */
 
-footer{
-    background:#1E1E29;
-    color:white;
-    padding:55px 0;
+footer {
+    padding: 42px 0;
+
+    background: #022f1f;
+
+    color: rgba(255,255,255,0.68);
 }
 
-.footer-grid{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:40px;
+.footer-inner {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
 }
 
-footer h3{
-    margin-bottom:15px;
+.footer-logo {
+    width: 125px;
+
+    filter: brightness(0) invert(1);
+
+    opacity: 0.9;
 }
 
-footer p{
-    color:#B9BEC5;
-    max-width:350px;
-}
-
-footer ul{
-    list-style:none;
-}
-
-footer li{
-    margin-bottom:9px;
-}
-
-footer a{
-    color:#C8CDD3;
-    text-decoration:none;
-}
-
-footer a:hover{
-    color:var(--blue-light);
-}
-
-.footer-bottom{
-    margin-top:40px;
-    padding-top:20px;
-    border-top:1px solid rgba(255,255,255,.1);
-    color:#8F969E;
-    font-size:13px;
+.footer-text {
+    font-size: 12px;
 }
 
 /* =========================================================
-   MOBILE
-========================================================= */
+   RESPONSIVE
+   ========================================================= */
 
-@media(max-width:950px){
+@media (max-width: 980px) {
 
     .hero-grid,
-    .audience-grid{
-        grid-template-columns:1fr;
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
     }
 
-    .cards,
-    .modules{
-        grid-template-columns:1fr 1fr;
+    .hero-copy {
+        max-width: 720px;
     }
 
-    .multi-site-grid{
-        grid-template-columns:1fr;
+    .feature-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
-    .hero h1{
-        font-size:45px;
+    .industry-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
-    nav ul{
-        display:none;
+    .rules-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        gap: 45px;
     }
 }
 
-@media(max-width:650px){
+@media (max-width: 720px) {
 
-    section{
-        padding:65px 0;
+    .container {
+        width: min(
+            var(--max-width),
+            calc(100% - 30px)
+        );
     }
 
-    .hero{
-        padding:75px 0;
+    .nav-links {
+        display: none;
     }
 
-    .hero h1{
-        font-size:38px;
+    .hero {
+        padding: 65px 0 70px;
     }
 
-    .hero p{
-        font-size:17px;
+    .hero h1 {
+        font-size: 43px;
     }
 
-    .cards,
-    .modules,
-    .principles-grid{
-        grid-template-columns:1fr;
+    .hero-text {
+        font-size: 17px;
     }
 
-    .section-title h2,
-    .audience-copy h2{
-        font-size:31px;
+    .photo-grid {
+        grid-template-columns: 1fr 1fr;
+
+        grid-template-rows:
+            180px
+            180px;
     }
 
-    .cta h2{
-        font-size:32px;
+    .positioning-inner {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
     }
 
-    .future-box{
-        padding:35px 22px;
+    .section {
+        padding: 75px 0;
     }
 
-    .footer-grid{
-        grid-template-columns:1fr;
+    .feature-grid,
+    .industry-grid,
+    .rules-grid {
+        grid-template-columns: 1fr;
     }
 
-    .btn{
-        display:block;
-        text-align:center;
-        margin:10px 0 !important;
+    .dashboard-kpis {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .cta-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 20px;
     }
 }
 
@@ -683,1572 +1072,1060 @@ footer a:hover{
 
 <body>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+<!-- ======================================================
+     NAVIGATION
+     ====================================================== -->
 
-<header>
+<header class="navbar">
 
-<div class="container">
+    <div class="container nav-inner">
 
-<nav>
+        <!-- CINCOMETRIC LOGO -->
+        <a href="#" aria-label="CINCOMETRIC">
 
-<a href="#" class="brand">
-    <!-- Put the CINCOMETRIC logo PNG in the same folder as this HTML -->
-    <img src="cincometric-logo.png" alt="CINCOMETRIC">
-</a>
+            <svg
+                class="nav-logo"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 500 400"
+                role="img"
+                aria-label="CINCOMETRIC">
 
-<ul>
-    <li><a href="#about" data-i18n="nav_about">About</a></li>
-    <li><a href="#features" data-i18n="nav_features">Capabilities</a></li>
-    <li><a href="#principles" data-i18n="nav_principles">Principles</a></li>
-    <li><a href="#future" data-i18n="nav_future">Future product</a></li>
-    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
-</ul>
+                <defs>
 
-<select id="languageSelect" class="language-select" aria-label="Language">
-    <option value="en">English</option>
-    <option value="nl">Nederlands</option>
-    <option value="fr">Français</option>
-    <option value="de">Deutsch</option>
-</select>
+                    <linearGradient
+                        id="nav_text_grad"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%">
 
-</nav>
+                        <stop
+                            offset="0%"
+                            stop-color="#5fc9a4"/>
 
-</div>
+                        <stop
+                            offset="50%"
+                            stop-color="#148356"/>
+
+                        <stop
+                            offset="100%"
+                            stop-color="#035c3a"/>
+
+                    </linearGradient>
+
+                </defs>
+
+                <g>
+
+                    <rect
+                        x="38"
+                        y="135"
+                        width="63"
+                        height="94"
+                        rx="1.5"
+                        fill="#a3e2ca"/>
+
+                    <rect
+                        x="119"
+                        y="93"
+                        width="63"
+                        height="136"
+                        rx="1.5"
+                        fill="#5fc9a4"/>
+
+                    <rect
+                        x="200"
+                        y="55"
+                        width="63"
+                        height="174"
+                        rx="1.5"
+                        fill="#299d71"/>
+
+                    <rect
+                        x="281"
+                        y="30"
+                        width="63"
+                        height="199"
+                        rx="1.5"
+                        fill="#148356"/>
+
+                    <rect
+                        x="362"
+                        y="15"
+                        width="63"
+                        height="214"
+                        rx="1.5"
+                        fill="#035c3a"/>
+
+                    <rect
+                        x="38"
+                        y="237"
+                        width="387"
+                        height="5"
+                        fill="#035c3a"/>
+
+                </g>
+
+                <text
+                    x="38"
+                    y="318"
+                    font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+                    font-size="48"
+                    font-weight="700"
+                    letter-spacing="0"
+                    fill="url(#nav_text_grad)"
+                    textLength="387"
+                    lengthAdjust="spacingAndGlyphs">
+
+                    CINCOMETRIC
+
+                </text>
+
+            </svg>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="#product">Product</a>
+
+            <a href="#industries">Industries</a>
+
+            <a href="#approach">Approach</a>
+
+            <a href="#contact" class="nav-button">
+                Get in touch
+            </a>
+
+        </nav>
+
+    </div>
 
 </header>
 
 
-<!-- =====================================================
+<!-- ======================================================
      HERO
-===================================================== -->
+     ====================================================== -->
 
 <section class="hero">
 
-<div class="container">
-
-<div class="hero-grid">
-
-<div>
-
-<div class="hero-kicker" data-i18n="hero_kicker">
-Engineering portfolio management
-</div>
-
-<h1 data-i18n="hero_title">
-Hands-on control for complex engineering project portfolios.
-</h1>
-
-<p data-i18n="hero_text">
-CINCOMETRIC is being developed for engineering managers and
-technical managers who have to steer multiple projects,
-multiple disciplines and, often, multiple sites — without
-losing sight of what really needs attention.
-</p>
-
-<a href="#future" class="btn btn-primary" data-i18n="hero_button">
-Discover the concept
-</a>
-
-<a href="#principles" class="btn btn-secondary" data-i18n="hero_button2">
-Our principles
-</a>
-
-</div>
+    <div class="container hero-grid">
 
 
-<div class="hero-card">
+        <div class="hero-copy">
 
-<img src="cincometric-logo.png" alt="CINCOMETRIC logo">
-
-<h3 data-i18n="hero_card_title">
-Built from project experience
-</h3>
-
-<p data-i18n="hero_card_text">
-The concept is grounded in practical experience across
-project management, project controls, engineering management
-and portfolio management.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
+            <div class="eyebrow">
+                Engineering project control
+            </div>
 
 
-<!-- =====================================================
-     ABOUT / AUDIENCE
-===================================================== -->
-
-<section class="audience" id="about">
-
-<div class="container">
-
-<div class="audience-grid">
-
-<div class="audience-copy">
-
-<h2 data-i18n="audience_title">
-Not another reporting tool.
-</h2>
-
-<p data-i18n="audience_text1">
-CINCOMETRIC is intended to support the people who actually
-have to make engineering portfolios move: engineering managers,
-technical managers, project managers and portfolio leaders.
-</p>
-
-<p data-i18n="audience_text2">
-The focus is practical: understand what is happening, identify
-what is drifting, make ownership visible and act before small
-issues become major project problems.
-</p>
-
-<ul class="audience-list">
-
-<li data-i18n="audience_li1">
-Manage a portfolio of CAPEX and engineering projects
-</li>
-
-<li data-i18n="audience_li2">
-Coordinate projects across one or multiple industrial sites
-</li>
-
-<li data-i18n="audience_li3">
-Maintain visibility of cost, schedule, readiness, risks and actions
-</li>
-
-<li data-i18n="audience_li4">
-Bring engineering, procurement, project controls and operations together
-</li>
-
-</ul>
-
-</div>
+            <h1>
+                Your projects.
+                <span>Under control.</span>
+            </h1>
 
 
-<div class="audience-card">
+            <p class="hero-text">
 
-<h3 data-i18n="audience_card_title">
-Designed around the reality of engineering management
-</h3>
+                CINCOMETRIC gives engineering and technical managers
+                a practical cockpit to manage projects, resources,
+                costs, schedules and risks — without turning project
+                control into another full-time job.
 
-<p data-i18n="audience_card_text1">
-Projects rarely fail because information does not exist.
-They fail because the right information is fragmented,
-late, unclear or disconnected from decisions.
-</p>
+            </p>
 
-<p data-i18n="audience_card_text2">
-CINCOMETRIC aims to connect the information needed to
-manage the portfolio with the actions required to move it.
-</p>
 
-</div>
+            <div class="hero-actions">
 
-</div>
+                <a
+                    href="#product"
+                    class="button-primary">
 
-</div>
+                    Discover CINCOMETRIC
+
+                </a>
+
+
+                <a
+                    href="#industries"
+                    class="button-secondary">
+
+                    See industries
+
+                </a>
+
+            </div>
+
+
+            <div class="hero-note">
+
+                <span class="hero-note-dot"></span>
+
+                Built for real engineering environments
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             INDUSTRY PHOTO MONTAGE
+
+             Replace the four image paths below.
+             ================================================= -->
+
+        <div class="hero-visual">
+
+            <div class="photo-grid">
+
+
+                <!-- PHOTO 01
+                     Process / chemical / industrial plant -->
+
+                <div class="photo photo-process">
+
+                    <img
+                        src="images/process-chemical.jpg"
+                        alt="Industrial process plant and engineering infrastructure">
+
+                    <div class="photo-label">
+                        Process Industry
+                    </div>
+
+                </div>
+
+
+                <!-- PHOTO 02
+                     Energy / utilities -->
+
+                <div class="photo photo-energy">
+
+                    <img
+                        src="images/energy-utilities.jpg"
+                        alt="Energy and utilities infrastructure">
+
+                    <div class="photo-label">
+                        Energy & Utilities
+                    </div>
+
+                </div>
+
+
+                <!-- PHOTO 03
+                     Water / environment -->
+
+                <div class="photo photo-water">
+
+                    <img
+                        src="images/water-environment.jpg"
+                        alt="Water treatment and environmental infrastructure">
+
+                    <div class="photo-label">
+                        Water & Environment
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- =====================================================
-     CAPABILITIES
-===================================================== -->
+<!-- ======================================================
+     POSITIONING STRIP
+     ====================================================== -->
 
-<section class="features" id="features">
+<section class="positioning">
 
-<div class="container">
-
-<div class="section-title">
-
-<h2 data-i18n="features_title">
-One view of the engineering portfolio
-</h2>
-
-<p data-i18n="features_intro">
-The future CINCOMETRIC platform is being designed to bring
-the core information used by engineering and technical
-managers into one practical operating environment.
-</p>
-
-</div>
+    <div class="container positioning-inner">
 
 
-<div class="cards">
+        <div class="position-item">
+
+            <div class="position-icon">
+                ✓
+            </div>
+
+            Portfolio visibility
+
+        </div>
 
 
-<div class="card">
+        <div class="position-item">
 
-<div class="icon">📊</div>
+            <div class="position-icon">
+                ↗
+            </div>
 
-<h3 data-i18n="feature1_title">
-Portfolio visibility
-</h3>
+            Project controls
 
-<p data-i18n="feature1_text">
-See projects together rather than as isolated reports.
-Understand status, priorities, forecast, risks, readiness
-and areas requiring management attention.
-</p>
-
-</div>
+        </div>
 
 
-<div class="card">
+        <div class="position-item">
 
-<div class="icon">🚦</div>
+            <div class="position-icon">
+                ◫
+            </div>
 
-<h3 data-i18n="feature2_title">
-Governance & stage gates
-</h3>
+            Engineering resources
 
-<p data-i18n="feature2_text">
-Structure FEL, PAR and stage-gate reviews around clear
-deliverables, ownership, approvals and readiness.
-</p>
+        </div>
 
-</div>
-
-
-<div class="card">
-
-<div class="icon">📅</div>
-
-<h3 data-i18n="feature3_title">
-Project controls
-</h3>
-
-<p data-i18n="feature3_text">
-Connect budget, forecast, schedule, milestones, progress
-and resource information so that project performance can
-be understood in context.
-</p>
-
-</div>
-
-
-<div class="card">
-
-<div class="icon">📦</div>
-
-<h3 data-i18n="feature4_title">
-Procurement & vendors
-</h3>
-
-<p data-i18n="feature4_text">
-Keep critical procurement activities, vendor commitments,
-deliveries and engineering interfaces visible to the
-project team.
-</p>
-
-</div>
-
-
-<div class="card">
-
-<div class="icon">🔄</div>
-
-<h3 data-i18n="feature5_title">
-Change, MOC & actions
-</h3>
-
-<p data-i18n="feature5_text">
-Connect changes, MOCs, actions, decisions and ownership
-instead of allowing them to disappear into separate trackers.
-</p>
-
-</div>
-
-
-<div class="card">
-
-<div class="icon">📁</div>
-
-<h3 data-i18n="feature6_title">
-Engineering readiness
-</h3>
-
-<p data-i18n="feature6_text">
-Maintain visibility of engineering documents, deliverables,
-interfaces and design maturity as projects move forward.
-</p>
-
-</div>
-
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
-<!-- =====================================================
-     MODULES
-===================================================== -->
+<!-- ======================================================
+     PRODUCT
+     ====================================================== -->
 
-<section class="dark-section">
+<section
+    class="section"
+    id="product">
 
-<div class="container">
-
-<div class="section-title">
-
-<h2 data-i18n="modules_title">
-A practical project portfolio operating layer
-</h2>
-
-<p data-i18n="modules_intro">
-The intent is not to replace specialist engineering or
-enterprise systems, but to connect the management information
-needed to run the portfolio.
-</p>
-
-</div>
+    <div class="container">
 
 
-<div class="modules">
+        <div class="section-heading">
+
+            <div class="section-kicker">
+                One practical cockpit
+            </div>
+
+            <h2>
+                From project data to
+                management decisions.
+            </h2>
+
+            <p>
+                CINCOMETRIC brings the information an engineering
+                manager actually needs into one operational view.
+            </p>
+
+        </div>
 
 
-<div class="module">
-
-<h3 data-i18n="module1_title">
-Portfolio management
-</h3>
-
-<ul>
-<li data-i18n="module1_li1">Portfolio dashboards</li>
-<li data-i18n="module1_li2">Project prioritisation</li>
-<li data-i18n="module1_li3">CAPEX forecasting</li>
-<li data-i18n="module1_li4">RAG and management attention</li>
-</ul>
-
-</div>
+        <div class="feature-grid">
 
 
-<div class="module">
+            <article class="feature-card">
 
-<h3 data-i18n="module2_title">
-Project governance
-</h3>
+                <div class="feature-number">
+                    01
+                </div>
 
-<ul>
-<li data-i18n="module2_li1">FEL / PAR governance</li>
-<li data-i18n="module2_li2">Stage-gate readiness</li>
-<li data-i18n="module2_li3">Deliverable compliance</li>
-<li data-i18n="module2_li4">Approval tracking</li>
-</ul>
+                <h3>
+                    Portfolio visibility
+                </h3>
 
-</div>
+                <p>
+                    See projects, stages, budgets, risks and
+                    priorities across sites without maintaining
+                    another collection of spreadsheets.
+                </p>
 
-
-<div class="module">
-
-<h3 data-i18n="module3_title">
-Project controls
-</h3>
-
-<ul>
-<li data-i18n="module3_li1">Budget vs forecast</li>
-<li data-i18n="module3_li2">Milestone tracking</li>
-<li data-i18n="module3_li3">Progress monitoring</li>
-<li data-i18n="module3_li4">Resource visibility</li>
-</ul>
-
-</div>
+            </article>
 
 
-<div class="module">
+            <article class="feature-card">
 
-<h3 data-i18n="module4_title">
-Engineering & procurement
-</h3>
+                <div class="feature-number">
+                    02
+                </div>
 
-<ul>
-<li data-i18n="module4_li1">Engineering deliverables</li>
-<li data-i18n="module4_li2">Procurement follow-up</li>
-<li data-i18n="module4_li3">Vendor interfaces</li>
-<li data-i18n="module4_li4">Technical readiness</li>
-</ul>
+                <h3>
+                    Project controls
+                </h3>
 
-</div>
+                <p>
+                    Connect estimates, commitments, actuals,
+                    forecasts, schedules and changes into a
+                    practical project-control workflow.
+                </p>
 
-
-<div class="module">
-
-<h3 data-i18n="module5_title">
-Change & risk
-</h3>
-
-<ul>
-<li data-i18n="module5_li1">MOC linkage</li>
-<li data-i18n="module5_li2">Risk registers</li>
-<li data-i18n="module5_li3">Actions and decisions</li>
-<li data-i18n="module5_li4">Ownership and due dates</li>
-</ul>
-
-</div>
+            </article>
 
 
-<div class="module">
+            <article class="feature-card">
 
-<h3 data-i18n="module6_title">
-Documentation & data
-</h3>
+                <div class="feature-number">
+                    03
+                </div>
 
-<ul>
-<li data-i18n="module6_li1">Document registers</li>
-<li data-i18n="module6_li2">Revision visibility</li>
-<li data-i18n="module6_li3">Project evidence</li>
-<li data-i18n="module6_li4">Centralised project information</li>
-</ul>
+                <h3>
+                    Stage-gate discipline
+                </h3>
 
-</div>
+                <p>
+                    Make FEL, design, execution and close-out
+                    decisions based on structured deliverables,
+                    questions and management reviews.
+                </p>
+
+            </article>
 
 
-</div>
+            <article class="feature-card">
 
-</div>
+                <div class="feature-number">
+                    04
+                </div>
+
+                <h3>
+                    Resource planning
+                </h3>
+
+                <p>
+                    Understand engineering demand versus available
+                    capacity at person, discipline and portfolio
+                    level.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-number">
+                    05
+                </div>
+
+                <h3>
+                    Procurement control
+                </h3>
+
+                <p>
+                    Track packages, purchase orders, commitments,
+                    milestones and expected expenditure alongside
+                    the project schedule.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="feature-number">
+                    06
+                </div>
+
+                <h3>
+                    Management reporting
+                </h3>
+
+                <p>
+                    Turn operational project data into concise
+                    dashboards that support engineering and
+                    portfolio decisions.
+                </p>
+
+            </article>
+
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- =====================================================
-     PRINCIPLES
-===================================================== -->
+<!-- ======================================================
+     INDUSTRIES
+     ====================================================== -->
 
-<section class="principles" id="principles">
+<section
+    class="section section-light"
+    id="industries">
 
-<div class="container">
-
-<div class="section-title">
-
-<h2 data-i18n="principles_title">
-Engineering management principles
-</h2>
-
-<p data-i18n="principles_intro">
-CINCOMETRIC is being shaped by practical lessons from
-project management, project controls, engineering management
-and industrial project delivery.
-</p>
-
-</div>
+    <div class="container">
 
 
-<div class="principles-grid">
+        <div class="section-heading center">
+
+            <div class="section-kicker">
+                Built across industries
+            </div>
+
+            <h2>
+                Different plants.
+                Same project discipline.
+            </h2>
+
+            <p>
+                The engineering challenges vary by industry,
+                but the need for visibility, control and
+                reliable decisions remains the same.
+            </p>
+
+        </div>
 
 
-<div class="principle">
-
-<div class="principle-number">1</div>
-
-<h3 data-i18n="principle1_title">
-Start with scope and design maturity
-</h3>
-
-<p data-i18n="principle1_text">
-Freeze scope only when the front-end loading and key design
-inputs are sufficiently mature. Immature specifications
-create rework and change later.
-</p>
-
-</div>
+        <div class="industry-grid">
 
 
-<div class="principle">
+            <!-- PROCESS -->
 
-<div class="principle-number">2</div>
+            <article class="industry-card">
 
-<h3 data-i18n="principle2_title">
-Build the right team early
-</h3>
+                <img
+                    src="images/process-chemical.jpg"
+                    alt="Chemical and process industry plant">
 
-<p data-i18n="principle2_text">
-Core project roles need clear ownership and early involvement.
-Fragmented responsibilities create delays and gaps.
-</p>
+                <div class="industry-overlay">
 
-</div>
+                    <h3>
+                        Process Industry
+                    </h3>
 
+                    <p>
+                        Chemical, food, biogas,
+                        waste and industrial processing.
+                    </p>
 
-<div class="principle">
+                </div>
 
-<div class="principle-number">3</div>
-
-<h3 data-i18n="principle3_title">
-Manage contracts proactively
-</h3>
-
-<p data-i18n="principle3_text">
-Contracts should be used as management tools. Deviations,
-interfaces and obligations need active monitoring before
-they become problems.
-</p>
-
-</div>
+            </article>
 
 
-<div class="principle">
+            <!-- ENERGY -->
 
-<div class="principle-number">4</div>
+            <article class="industry-card">
 
-<h3 data-i18n="principle4_title">
-Bring procurement in early
-</h3>
+                <img
+                    src="images/energy-utilities.jpg"
+                    alt="Energy and utilities project">
 
-<p data-i18n="principle4_text">
-Procurement and vendor considerations belong in the project
-from the early phases, with appropriate supplier oversight.
-</p>
+                <div class="industry-overlay">
 
-</div>
+                    <h3>
+                        Energy & Utilities
+                    </h3>
 
+                    <p>
+                        Energy production, utilities,
+                        infrastructure and decarbonisation.
+                    </p>
 
-<div class="principle">
+                </div>
 
-<div class="principle-number">5</div>
-
-<h3 data-i18n="principle5_title">
-Make ownership and interfaces explicit
-</h3>
-
-<p data-i18n="principle5_text">
-Clear responsibilities and interfaces between disciplines,
-vendors, project teams and operations reduce gaps,
-overlap and rework.
-</p>
-
-</div>
+            </article>
 
 
-<div class="principle">
+            <!-- WATER -->
 
-<div class="principle-number">6</div>
+            <article class="industry-card">
 
-<h3 data-i18n="principle6_title">
-Treat data, documents and communication as project assets
-</h3>
+                <img
+                    src="images/water-environment.jpg"
+                    alt="Water treatment infrastructure">
 
-<p data-i18n="principle6_text">
-Information needs defined ownership, disciplined change
-processes and a common source of truth.
-</p>
+                <div class="industry-overlay">
 
-</div>
+                    <h3>
+                        Water & Environment
+                    </h3>
 
+                    <p>
+                        Water treatment, waste management
+                        and environmental infrastructure.
+                    </p>
 
-<div class="principle">
+                </div>
 
-<div class="principle-number">7</div>
-
-<h3 data-i18n="principle7_title">
-Safety and operations belong in the design
-</h3>
-
-<p data-i18n="principle7_text">
-HSE, operations and maintenance should influence engineering
-and design decisions early rather than becoming late-stage
-stakeholders.
-</p>
-
-</div>
+            </article>
 
 
-<div class="principle">
+            <!-- MANUFACTURING -->
 
-<div class="principle-number">8</div>
+            <article class="industry-card">
 
-<h3 data-i18n="principle8_title">
-Construction and commissioning need clear accountability
-</h3>
+                <img
+                    src="images/manufacturing.jpg"
+                    alt="Industrial manufacturing facility">
 
-<p data-i18n="principle8_text">
-Build and start-up have different responsibilities, but they
-need to remain aligned through structured handover and system
-tracking.
-</p>
+                <div class="industry-overlay">
 
-</div>
+                    <h3>
+                        Manufacturing
+                    </h3>
+
+                    <p>
+                        Production facilities,
+                        brownfield projects and site upgrades.
+                    </p>
+
+                </div>
+
+            </article>
 
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </section>
 
 
-<!-- =====================================================
-     MULTI-SITE
-===================================================== -->
+<!-- ======================================================
+     DASHBOARD
+     ====================================================== -->
 
-<section class="multi-site">
+<section class="dashboard-section">
 
-<div class="container">
-
-<div class="section-title">
-
-<h2 data-i18n="multisite_title">
-From one site to a wider engineering portfolio
-</h2>
-
-<p data-i18n="multisite_intro">
-The management challenge becomes different when projects
-are distributed across several plants or business units.
-CINCOMETRIC is being designed with that reality in mind.
-</p>
-
-</div>
+    <div class="container dashboard-grid">
 
 
-<div class="multi-site-grid">
+        <div class="dashboard-copy">
+
+            <div class="section-kicker">
+                Management cockpit
+            </div>
 
 
-<div class="site-card">
-
-<h3 data-i18n="site1_title">
-One industrial site
-</h3>
-
-<p data-i18n="site1_text">
-Maintain a common view across engineering, maintenance,
-operations, procurement and project controls without
-building another layer of disconnected reporting.
-</p>
-
-</div>
+            <h2>
+                See what needs
+                attention.
+            </h2>
 
 
-<div class="site-card">
-
-<h3 data-i18n="site2_title">
-Multiple sites
-</h3>
-
-<p data-i18n="site2_text">
-Compare project status, priorities, risks and resource
-requirements across different locations while retaining
-site-level ownership.
-</p>
-
-</div>
+            <p>
+                CINCOMETRIC is designed around the questions an
+                engineering manager needs to answer — not around
+                the structure of an enterprise software package.
+            </p>
 
 
-<div class="site-card">
-
-<h3 data-i18n="site3_title">
-Engineering management
-</h3>
-
-<p data-i18n="site3_text">
-Give engineering and technical managers a practical
-management layer between individual project teams and
-the wider organisation.
-</p>
-
-</div>
+            <div class="dashboard-list">
 
 
-</div>
+                <div class="dashboard-list-item">
+                    Which projects are drifting?
+                </div>
 
-</div>
+
+                <div class="dashboard-list-item">
+                    Where is engineering capacity constrained?
+                </div>
+
+
+                <div class="dashboard-list-item">
+                    What is the current forecast?
+                </div>
+
+
+                <div class="dashboard-list-item">
+                    Which packages or decisions need attention?
+                </div>
+
+
+                <div class="dashboard-list-item">
+                    Where are the portfolio risks?
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD MOCKUP -->
+
+        <div class="dashboard-mockup">
+
+
+            <div class="dashboard-top">
+
+                <div class="dashboard-title">
+                    Project Portfolio
+                </div>
+
+                <div class="dashboard-status">
+                    Live portfolio view
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-kpis">
+
+
+                <div class="kpi">
+
+                    <div class="kpi-label">
+                        Projects
+                    </div>
+
+                    <div class="kpi-value">
+                        42
+                    </div>
+
+                </div>
+
+
+                <div class="kpi">
+
+                    <div class="kpi-label">
+                        CAPEX
+                    </div>
+
+                    <div class="kpi-value">
+                        €38m
+                    </div>
+
+                </div>
+
+
+                <div class="kpi">
+
+                    <div class="kpi-label">
+                        On track
+                    </div>
+
+                    <div class="kpi-value">
+                        76%
+                    </div>
+
+                </div>
+
+
+                <div class="kpi">
+
+                    <div class="kpi-label">
+                        Resources
+                    </div>
+
+                    <div class="kpi-value">
+                        84%
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="dashboard-chart">
+
+                <div class="chart-bar bar-1"></div>
+                <div class="chart-bar bar-2"></div>
+                <div class="chart-bar bar-3"></div>
+                <div class="chart-bar bar-4"></div>
+                <div class="chart-bar bar-5"></div>
+                <div class="chart-bar bar-6"></div>
+                <div class="chart-bar bar-7"></div>
+                <div class="chart-bar bar-8"></div>
+                <div class="chart-bar bar-9"></div>
+                <div class="chart-bar bar-10"></div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- =====================================================
-     FUTURE PRODUCT
-===================================================== -->
+<!-- ======================================================
+     APPROACH
+     ====================================================== -->
 
-<section class="future" id="future">
+<section
+    class="rules"
+    id="approach">
 
-<div class="container">
+    <div class="container">
 
-<div class="future-box">
 
-<h2 data-i18n="future_title">
-A product being built from the field
-</h2>
+        <div class="section-heading center">
 
-<p data-i18n="future_text1">
-CINCOMETRIC is a future product concept. It is being developed
-from hands-on experience with industrial CAPEX projects,
-engineering management, project controls and portfolio
-management.
-</p>
+            <div class="section-kicker">
+                The CINCOMETRIC approach
+            </div>
 
-<p data-i18n="future_text2">
-The objective is deliberately practical: help experienced
-engineering and technical managers spend less time assembling
-information and more time managing the projects, interfaces,
-decisions and risks that matter.
-</p>
+            <h2>
+                Less administration.
+                Better control.
+            </h2>
 
-<p data-i18n="future_text3">
-This website is an early introduction to the idea and an
-opportunity to follow its development.
-</p>
+            <p>
+                Good project management does not require
+                unnecessary complexity.
+            </p>
 
-</div>
+        </div>
 
-</div>
+
+        <div class="rules-grid">
+
+
+            <div class="rule">
+
+                <h3>
+                    One source of project truth
+                </h3>
+
+                <p>
+                    Bring the essential project information
+                    together instead of searching across
+                    disconnected files and systems.
+                </p>
+
+            </div>
+
+
+            <div class="rule">
+
+                <h3>
+                    Designed for engineers
+                </h3>
+
+                <p>
+                    The interface follows the way engineering
+                    teams actually work — projects, packages,
+                    resources, decisions and actions.
+                </p>
+
+            </div>
+
+
+            <div class="rule">
+
+                <h3>
+                    Management at the right level
+                </h3>
+
+                <p>
+                    Keep detailed project information available
+                    without forcing management to work at the
+                    transaction level.
+                </p>
+
+            </div>
+
+
+            <div class="rule">
+
+                <h3>
+                    Progressive control
+                </h3>
+
+                <p>
+                    Apply the right level of project controls
+                    depending on project size, maturity and risk.
+                </p>
+
+            </div>
+
+
+            <div class="rule">
+
+                <h3>
+                    Portfolio before bureaucracy
+                </h3>
+
+                <p>
+                    Portfolio visibility should help engineering
+                    managers make decisions — not create another
+                    reporting exercise.
+                </p>
+
+            </div>
+
+
+            <div class="rule">
+
+                <h3>
+                    Practical by design
+                </h3>
+
+                <p>
+                    Somewhere between Excel and heavyweight
+                    enterprise project systems is often exactly
+                    where engineering teams need to be.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- ======================================================
      CTA
-===================================================== -->
+     ====================================================== -->
 
-<section class="cta" id="contact">
+<section
+    class="cta"
+    id="contact">
 
-<div class="container">
+    <div class="container cta-inner">
 
-<h2 data-i18n="cta_title">
-Interested in where CINCOMETRIC is going?
-</h2>
 
-<p data-i18n="cta_text">
-CINCOMETRIC is being shaped around real engineering management
-problems. If this is a challenge you recognise, get in touch
-and follow the development of the product.
-</p>
+        <div>
 
-<a href="mailto:hello@cincometric.com" class="btn btn-primary"
-   data-i18n="cta_button">
-Get in touch
-</a>
+            <h2>
+                A clearer view of your
+                engineering portfolio.
+            </h2>
 
-</div>
+            <p>
+                CINCOMETRIC brings project data, controls and
+                engineering capacity together in one practical
+                management cockpit.
+            </p>
+
+        </div>
+
+
+        <a
+            href="mailto:info@cincometric.com"
+            class="cta-button">
+
+            Get in touch
+
+        </a>
+
+
+    </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- ======================================================
      FOOTER
-===================================================== -->
+     ====================================================== -->
 
 <footer>
 
-<div class="container">
-
-<div class="footer-grid">
-
-<div>
-
-<h3>CINCOMETRIC</h3>
-
-<p data-i18n="footer_tagline">
-Hands-on engineering portfolio management for technical
-and engineering leaders.
-</p>
-
-</div>
+    <div class="container footer-inner">
 
 
-<div>
+        <!-- CINCOMETRIC LOGO -->
 
-<h3 data-i18n="footer_product">
-Product
-</h3>
+        <svg
+            class="footer-logo"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 500 400"
+            role="img"
+            aria-label="CINCOMETRIC">
 
-<ul>
-<li><a href="#features" data-i18n="nav_features">Capabilities</a></li>
-<li><a href="#principles" data-i18n="nav_principles">Principles</a></li>
-<li><a href="#future" data-i18n="nav_future">Future product</a></li>
-</ul>
+            <defs>
 
-</div>
+                <linearGradient
+                    id="footer_text_grad"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%">
+
+                    <stop
+                        offset="0%"
+                        stop-color="#5fc9a4"/>
+
+                    <stop
+                        offset="50%"
+                        stop-color="#148356"/>
+
+                    <stop
+                        offset="100%"
+                        stop-color="#035c3a"/>
+
+                </linearGradient>
+
+            </defs>
+
+            <g>
+
+                <rect
+                    x="38"
+                    y="135"
+                    width="63"
+                    height="94"
+                    rx="1.5"
+                    fill="#a3e2ca"/>
+
+                <rect
+                    x="119"
+                    y="93"
+                    width="63"
+                    height="136"
+                    rx="1.5"
+                    fill="#5fc9a4"/>
+
+                <rect
+                    x="200"
+                    y="55"
+                    width="63"
+                    height="174"
+                    rx="1.5"
+                    fill="#299d71"/>
+
+                <rect
+                    x="281"
+                    y="30"
+                    width="63"
+                    height="199"
+                    rx="1.5"
+                    fill="#148356"/>
+
+                <rect
+                    x="362"
+                    y="15"
+                    width="63"
+                    height="214"
+                    rx="1.5"
+                    fill="#035c3a"/>
+
+                <rect
+                    x="38"
+                    y="237"
+                    width="387"
+                    height="5"
+                    fill="#035c3a"/>
+
+            </g>
+
+            <text
+                x="38"
+                y="318"
+                font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+                font-size="48"
+                font-weight="700"
+                letter-spacing="0"
+                fill="url(#footer_text_grad)"
+                textLength="387"
+                lengthAdjust="spacingAndGlyphs">
+
+                CINCOMETRIC
+
+            </text>
+
+        </svg>
 
 
-<div>
+        <div class="footer-text">
 
-<h3 data-i18n="footer_focus">
-Focus
-</h3>
+            © 2026 CINCOMETRIC. Engineering project portfolio management.
 
-<ul>
-<li data-i18n="footer_focus1">Engineering management</li>
-<li data-i18n="footer_focus2">Project controls</li>
-<li data-i18n="footer_focus3">Portfolio management</li>
-<li data-i18n="footer_focus4">Industrial CAPEX</li>
-</ul>
+        </div>
 
-</div>
-
-
-<div>
-
-<h3 data-i18n="footer_contact">
-Contact
-</h3>
-
-<ul>
-<li>
-<a href="mailto:hello@cincometric.com">
-hello@cincometric.com
-</a>
-</li>
-</ul>
-
-</div>
-
-</div>
-
-
-<div class="footer-bottom">
-
-<span data-i18n="footer_bottom">
-CINCOMETRIC — Engineering portfolio management, built from experience.
-</span>
-
-</div>
-
-</div>
+    </div>
 
 </footer>
-
-
-<!-- =====================================================
-     LANGUAGE ENGINE
-===================================================== -->
-
-<script>
-
-const translations = {
-
-en: {
-
-nav_about:"About",
-nav_features:"Capabilities",
-nav_principles:"Principles",
-nav_future:"Future product",
-nav_contact:"Contact",
-
-hero_kicker:"Engineering portfolio management",
-
-hero_title:"Hands-on control for complex engineering project portfolios.",
-
-hero_text:"CINCOMETRIC is being developed for engineering managers and technical managers who have to steer multiple projects, multiple disciplines and, often, multiple sites — without losing sight of what really needs attention.",
-
-hero_button:"Discover the concept",
-hero_button2:"Our principles",
-
-hero_card_title:"Built from project experience",
-
-hero_card_text:"The concept is grounded in practical experience across project management, project controls, engineering management and portfolio management.",
-
-audience_title:"Not another reporting tool.",
-
-audience_text1:"CINCOMETRIC is intended to support the people who actually have to make engineering portfolios move: engineering managers, technical managers, project managers and portfolio leaders.",
-
-audience_text2:"The focus is practical: understand what is happening, identify what is drifting, make ownership visible and act before small issues become major project problems.",
-
-audience_li1:"Manage a portfolio of CAPEX and engineering projects",
-audience_li2:"Coordinate projects across one or multiple industrial sites",
-audience_li3:"Maintain visibility of cost, schedule, readiness, risks and actions",
-audience_li4:"Bring engineering, procurement, project controls and operations together",
-
-audience_card_title:"Designed around the reality of engineering management",
-
-audience_card_text1:"Projects rarely fail because information does not exist. They fail because the right information is fragmented, late, unclear or disconnected from decisions.",
-
-audience_card_text2:"CINCOMETRIC aims to connect the information needed to manage the portfolio with the actions required to move it.",
-
-features_title:"One view of the engineering portfolio",
-
-features_intro:"The future CINCOMETRIC platform is being designed to bring the core information used by engineering and technical managers into one practical operating environment.",
-
-feature1_title:"Portfolio visibility",
-feature1_text:"See projects together rather than as isolated reports. Understand status, priorities, forecast, risks, readiness and areas requiring management attention.",
-
-feature2_title:"Governance & stage gates",
-feature2_text:"Structure FEL, PAR and stage-gate reviews around clear deliverables, ownership, approvals and readiness.",
-
-feature3_title:"Project controls",
-feature3_text:"Connect budget, forecast, schedule, milestones, progress and resource information so that project performance can be understood in context.",
-
-feature4_title:"Procurement & vendors",
-feature4_text:"Keep critical procurement activities, vendor commitments, deliveries and engineering interfaces visible to the project team.",
-
-feature5_title:"Change, MOC & actions",
-feature5_text:"Connect changes, MOCs, actions, decisions and ownership instead of allowing them to disappear into separate trackers.",
-
-feature6_title:"Engineering readiness",
-feature6_text:"Maintain visibility of engineering documents, deliverables, interfaces and design maturity as projects move forward.",
-
-modules_title:"A practical project portfolio operating layer",
-
-modules_intro:"The intent is not to replace specialist engineering or enterprise systems, but to connect the management information needed to run the portfolio.",
-
-module1_title:"Portfolio management",
-module1_li1:"Portfolio dashboards",
-module1_li2:"Project prioritisation",
-module1_li3:"CAPEX forecasting",
-module1_li4:"RAG and management attention",
-
-module2_title:"Project governance",
-module2_li1:"FEL / PAR governance",
-module2_li2:"Stage-gate readiness",
-module2_li3:"Deliverable compliance",
-module2_li4:"Approval tracking",
-
-module3_title:"Project controls",
-module3_li1:"Budget vs forecast",
-module3_li2:"Milestone tracking",
-module3_li3:"Progress monitoring",
-module3_li4:"Resource visibility",
-
-module4_title:"Engineering & procurement",
-module4_li1:"Engineering deliverables",
-module4_li2:"Procurement follow-up",
-module4_li3:"Vendor interfaces",
-module4_li4:"Technical readiness",
-
-module5_title:"Change & risk",
-module5_li1:"MOC linkage",
-module5_li2:"Risk registers",
-module5_li3:"Actions and decisions",
-module5_li4:"Ownership and due dates",
-
-module6_title:"Documentation & data",
-module6_li1:"Document registers",
-module6_li2:"Revision visibility",
-module6_li3:"Project evidence",
-module6_li4:"Centralised project information",
-
-principles_title:"Engineering management principles",
-
-principles_intro:"CINCOMETRIC is being shaped by practical lessons from project management, project controls, engineering management and industrial project delivery.",
-
-principle1_title:"Start with scope and design maturity",
-principle1_text:"Freeze scope only when the front-end loading and key design inputs are sufficiently mature. Immature specifications create rework and change later.",
-
-principle2_title:"Build the right team early",
-principle2_text:"Core project roles need clear ownership and early involvement. Fragmented responsibilities create delays and gaps.",
-
-principle3_title:"Manage contracts proactively",
-principle3_text:"Contracts should be used as management tools. Deviations, interfaces and obligations need active monitoring before they become problems.",
-
-principle4_title:"Bring procurement in early",
-principle4_text:"Procurement and vendor considerations belong in the project from the early phases, with appropriate supplier oversight.",
-
-principle5_title:"Make ownership and interfaces explicit",
-principle5_text:"Clear responsibilities and interfaces between disciplines, vendors, project teams and operations reduce gaps, overlap and rework.",
-
-principle6_title:"Treat data, documents and communication as project assets",
-principle6_text:"Information needs defined ownership, disciplined change processes and a common source of truth.",
-
-principle7_title:"Safety and operations belong in the design",
-principle7_text:"HSE, operations and maintenance should influence engineering and design decisions early rather than becoming late-stage stakeholders.",
-
-principle8_title:"Construction and commissioning need clear accountability",
-principle8_text:"Build and start-up have different responsibilities, but they need to remain aligned through structured handover and system tracking.",
-
-multisite_title:"From one site to a wider engineering portfolio",
-
-multisite_intro:"The management challenge becomes different when projects are distributed across several plants or business units. CINCOMETRIC is being designed with that reality in mind.",
-
-site1_title:"One industrial site",
-site1_text:"Maintain a common view across engineering, maintenance, operations, procurement and project controls without building another layer of disconnected reporting.",
-
-site2_title:"Multiple sites",
-site2_text:"Compare project status, priorities, risks and resource requirements across different locations while retaining site-level ownership.",
-
-site3_title:"Engineering management",
-site3_text:"Give engineering and technical managers a practical management layer between individual project teams and the wider organisation.",
-
-future_title:"A product being built from the field",
-
-future_text1:"CINCOMETRIC is a future product concept. It is being developed from hands-on experience with industrial CAPEX projects, engineering management, project controls and portfolio management.",
-
-future_text2:"The objective is deliberately practical: help experienced engineering and technical managers spend less time assembling information and more time managing the projects, interfaces, decisions and risks that matter.",
-
-future_text3:"This website is an early introduction to the idea and an opportunity to follow its development.",
-
-cta_title:"Interested in where CINCOMETRIC is going?",
-
-cta_text:"CINCOMETRIC is being shaped around real engineering management problems. If this is a challenge you recognise, get in touch and follow the development of the product.",
-
-cta_button:"Get in touch",
-
-footer_tagline:"Hands-on engineering portfolio management for technical and engineering leaders.",
-
-footer_product:"Product",
-footer_focus:"Focus",
-footer_focus1:"Engineering management",
-footer_focus2:"Project controls",
-footer_focus3:"Portfolio management",
-footer_focus4:"Industrial CAPEX",
-footer_contact:"Contact",
-
-footer_bottom:"CINCOMETRIC — Engineering portfolio management, built from experience."
-
-},
-
-
-nl: {
-
-nav_about:"Over CINCOMETRIC",
-nav_features:"Mogelijkheden",
-nav_principles:"Principes",
-nav_future:"Toekomstig product",
-nav_contact:"Contact",
-
-hero_kicker:"Engineering portfolio management",
-
-hero_title:"Hands-on controle over complexe engineeringprojectportfolio's.",
-
-hero_text:"CINCOMETRIC wordt ontwikkeld voor engineering managers en technical managers die meerdere projecten, disciplines en vaak meerdere sites moeten aansturen — zonder het overzicht te verliezen van wat werkelijk aandacht nodig heeft.",
-
-hero_button:"Ontdek het concept",
-hero_button2:"Onze principes",
-
-hero_card_title:"Gebouwd vanuit projectervaring",
-
-hero_card_text:"Het concept is gebaseerd op praktijkervaring in projectmanagement, project controls, engineering management en portfoliomanagement.",
-
-audience_title:"Geen zoveelste rapportagetool.",
-
-audience_text1:"CINCOMETRIC is bedoeld voor de mensen die engineeringportfolio's daadwerkelijk moeten laten bewegen: engineering managers, technical managers, projectmanagers en portfolioverantwoordelijken.",
-
-audience_text2:"De focus is praktisch: begrijpen wat er gebeurt, afwijkingen herkennen, eigenaarschap zichtbaar maken en handelen voordat kleine problemen grote projectproblemen worden.",
-
-audience_li1:"Een portfolio van CAPEX- en engineeringprojecten beheren",
-audience_li2:"Projecten over één of meerdere industriële sites coördineren",
-audience_li3:"Inzicht behouden in kosten, planning, readiness, risico's en acties",
-audience_li4:"Engineering, procurement, project controls en operations verbinden",
-
-audience_card_title:"Ontworpen rond de realiteit van engineering management",
-
-audience_card_text1:"Projecten mislukken zelden omdat informatie niet bestaat. Ze lopen vast omdat de juiste informatie versnipperd, te laat, onduidelijk of losgekoppeld van beslissingen is.",
-
-audience_card_text2:"CINCOMETRIC wil de informatie die nodig is om het portfolio te beheren verbinden met de acties die nodig zijn om projecten vooruit te brengen.",
-
-features_title:"Eén overzicht van het engineeringportfolio",
-
-features_intro:"Het toekomstige CINCOMETRIC-platform wordt ontworpen om de kerninformatie die engineering- en technical managers nodig hebben samen te brengen in één praktische werkomgeving.",
-
-feature1_title:"Portfolio-overzicht",
-feature1_text:"Bekijk projecten samen in plaats van als afzonderlijke rapporten. Begrijp status, prioriteiten, forecast, risico's, readiness en waar managementaandacht nodig is.",
-
-feature2_title:"Governance & stage gates",
-feature2_text:"Structureer FEL-, PAR- en stage-gatereviews rond duidelijke deliverables, eigenaarschap, goedkeuringen en readiness.",
-
-feature3_title:"Project controls",
-feature3_text:"Verbind budget, forecast, planning, milestones, voortgang en resources zodat projectprestaties in hun context kunnen worden begrepen.",
-
-feature4_title:"Procurement & leveranciers",
-feature4_text:"Houd kritische procurementactiviteiten, leveranciersverplichtingen, leveringen en engineeringinterfaces zichtbaar voor het projectteam.",
-
-feature5_title:"Change, MOC & acties",
-feature5_text:"Verbind wijzigingen, MOC's, acties, beslissingen en eigenaarschap in plaats van ze te laten verdwijnen in afzonderlijke trackers.",
-
-feature6_title:"Engineering readiness",
-feature6_text:"Behoud inzicht in engineeringdocumenten, deliverables, interfaces en design maturity naarmate projecten vorderen.",
-
-modules_title:"Een praktische managementlaag voor projectportfolio's",
-
-modules_intro:"Het doel is niet om gespecialiseerde engineering- of enterprise-systemen te vervangen, maar om de managementinformatie die nodig is om het portfolio te sturen met elkaar te verbinden.",
-
-module1_title:"Portfoliomanagement",
-module1_li1:"Portfoliodashboards",
-module1_li2:"Projectprioritering",
-module1_li3:"CAPEX forecasting",
-module1_li4:"RAG en managementaandacht",
-
-module2_title:"Projectgovernance",
-module2_li1:"FEL / PAR governance",
-module2_li2:"Stage-gate readiness",
-module2_li3:"Deliverable compliance",
-module2_li4:"Goedkeuringsopvolging",
-
-module3_title:"Project controls",
-module3_li1:"Budget versus forecast",
-module3_li2:"Milestone-opvolging",
-module3_li3:"Voortgangsmonitoring",
-module3_li4:"Resource-overzicht",
-
-module4_title:"Engineering & procurement",
-module4_li1:"Engineeringdeliverables",
-module4_li2:"Procurementopvolging",
-module4_li3:"Leveranciersinterfaces",
-module4_li4:"Technische readiness",
-
-module5_title:"Change & risico",
-module5_li1:"MOC-koppeling",
-module5_li2:"Risicoregisters",
-module5_li3:"Acties en beslissingen",
-module5_li4:"Eigenaarschap en deadlines",
-
-module6_title:"Documentatie & data",
-module6_li1:"Documentregisters",
-module6_li2:"Revisie-overzicht",
-module6_li3:"Projectevidence",
-module6_li4:"Gecentraliseerde projectinformatie",
-
-principles_title:"Principes voor engineering management",
-
-principles_intro:"CINCOMETRIC wordt gevormd door praktische lessen uit projectmanagement, project controls, engineering management en industriële projectrealisatie.",
-
-principle1_title:"Start met scope en design maturity",
-principle1_text:"Bevries de scope pas wanneer de front-end loading en belangrijkste ontwerpinputs voldoende volwassen zijn. Onvolwassen specificaties veroorzaken later rework en wijzigingen.",
-
-principle2_title:"Bouw het juiste team vroeg op",
-principle2_text:"Kernrollen hebben duidelijk eigenaarschap en vroege betrokkenheid nodig. Versnipperde verantwoordelijkheden veroorzaken vertragingen en hiaten.",
-
-principle3_title:"Beheer contracten proactief",
-principle3_text:"Contracten moeten als stuurinstrument worden gebruikt. Afwijkingen, interfaces en verplichtingen moeten actief worden opgevolgd voordat ze problemen worden.",
-
-principle4_title:"Betrek procurement vroeg",
-principle4_text:"Procurement en leveranciersaspecten horen vanaf de vroege projectfasen bij het project, met passende leveranciersopvolging.",
-
-principle5_title:"Maak eigenaarschap en interfaces expliciet",
-principle5_text:"Duidelijke verantwoordelijkheden en interfaces tussen disciplines, leveranciers, projectteams en operations verminderen hiaten, overlap en rework.",
-
-principle6_title:"Behandel data, documenten en communicatie als projectassets",
-principle6_text:"Informatie heeft duidelijk eigenaarschap, gedisciplineerde changeprocessen en één gemeenschappelijke bron van waarheid nodig.",
-
-principle7_title:"Safety en operations horen in het ontwerp",
-principle7_text:"HSE, operations en maintenance moeten vroeg invloed hebben op engineering- en ontwerpbeslissingen en niet pas late stakeholders worden.",
-
-principle8_title:"Construction en commissioning vragen duidelijk eigenaarschap",
-principle8_text:"Bouw en opstart hebben verschillende verantwoordelijkheden, maar moeten via gestructureerde overdracht en systeemopvolging op elkaar afgestemd blijven.",
-
-multisite_title:"Van één site naar een breder engineeringportfolio",
-
-multisite_intro:"De managementuitdaging verandert wanneer projecten over meerdere plants of businessunits verspreid zijn. CINCOMETRIC wordt met die realiteit in gedachten ontworpen.",
-
-site1_title:"Eén industriële site",
-site1_text:"Behoud één overzicht over engineering, maintenance, operations, procurement en project controls zonder een extra laag van losstaande rapportering te creëren.",
-
-site2_title:"Meerdere sites",
-site2_text:"Vergelijk projectstatus, prioriteiten, risico's en resourcebehoeften tussen verschillende locaties, met behoud van eigenaarschap op siteniveau.",
-
-site3_title:"Engineering management",
-site3_text:"Geef engineering- en technical managers een praktische managementlaag tussen individuele projectteams en de bredere organisatie.",
-
-future_title:"Een product gebouwd vanuit de praktijk",
-
-future_text1:"CINCOMETRIC is een toekomstig productconcept. Het wordt ontwikkeld vanuit hands-on ervaring met industriële CAPEX-projecten, engineering management, project controls en portfoliomanagement.",
-
-future_text2:"Het doel is bewust praktisch: ervaren engineering- en technical managers minder tijd laten besteden aan het verzamelen van informatie en meer tijd aan projecten, interfaces, beslissingen en risico's die ertoe doen.",
-
-future_text3:"Deze website is een eerste kennismaking met het idee en een mogelijkheid om de ontwikkeling ervan te volgen.",
-
-cta_title:"Benieuwd waar CINCOMETRIC naartoe gaat?",
-
-cta_text:"CINCOMETRIC wordt opgebouwd rond echte problemen uit engineering management. Herken je deze uitdaging, neem dan contact op en volg de ontwikkeling van het product.",
-
-cta_button:"Neem contact op",
-
-footer_tagline:"Hands-on engineering portfoliomanagement voor technical en engineering leaders.",
-
-footer_product:"Product",
-footer_focus:"Focus",
-footer_focus1:"Engineering management",
-footer_focus2:"Project controls",
-footer_focus3:"Portfoliomanagement",
-footer_focus4:"Industriële CAPEX",
-footer_contact:"Contact",
-
-footer_bottom:"CINCOMETRIC — Engineering portfoliomanagement, gebouwd vanuit ervaring."
-
-},
-
-
-fr: {
-
-nav_about:"À propos",
-nav_features:"Capacités",
-nav_principles:"Principes",
-nav_future:"Produit futur",
-nav_contact:"Contact",
-
-hero_kicker:"Gestion de portefeuille d'ingénierie",
-
-hero_title:"Un pilotage concret des portefeuilles complexes de projets d'ingénierie.",
-
-hero_text:"CINCOMETRIC est développé pour les engineering managers et technical managers qui doivent piloter plusieurs projets, disciplines et souvent plusieurs sites — sans perdre de vue ce qui nécessite réellement leur attention.",
-
-hero_button:"Découvrir le concept",
-hero_button2:"Nos principes",
-
-hero_card_title:"Construit à partir de l'expérience projet",
-
-hero_card_text:"Le concept repose sur une expérience pratique en gestion de projets, project controls, engineering management et gestion de portefeuille.",
-
-audience_title:"Pas un outil de reporting supplémentaire.",
-
-audience_text1:"CINCOMETRIC est conçu pour les personnes qui doivent réellement faire avancer les portefeuilles d'ingénierie : engineering managers, technical managers, project managers et responsables de portefeuille.",
-
-audience_text2:"L'objectif est concret : comprendre la situation, identifier les dérives, rendre les responsabilités visibles et agir avant que de petits problèmes ne deviennent de grands problèmes de projet.",
-
-audience_li1:"Gérer un portefeuille de projets CAPEX et d'ingénierie",
-audience_li2:"Coordonner des projets sur un ou plusieurs sites industriels",
-audience_li3:"Garder une visibilité sur les coûts, les délais, la readiness, les risques et les actions",
-audience_li4:"Connecter engineering, procurement, project controls et operations",
-
-audience_card_title:"Conçu autour de la réalité de l'engineering management",
-
-audience_card_text1:"Les projets échouent rarement parce que l'information n'existe pas. Ils déraillent parce que l'information pertinente est fragmentée, tardive, peu claire ou déconnectée des décisions.",
-
-audience_card_text2:"CINCOMETRIC vise à connecter les informations nécessaires au pilotage du portefeuille avec les actions nécessaires pour faire avancer les projets.",
-
-features_title:"Une seule vision du portefeuille d'ingénierie",
-
-features_intro:"La future plateforme CINCOMETRIC est conçue pour réunir les informations essentielles utilisées par les engineering managers et technical managers dans un environnement de travail pratique.",
-
-feature1_title:"Visibilité portefeuille",
-feature1_text:"Visualiser les projets ensemble plutôt que sous forme de rapports isolés. Comprendre le statut, les priorités, les prévisions, les risques, la readiness et les points nécessitant une attention managériale.",
-
-feature2_title:"Gouvernance & stage gates",
-feature2_text:"Structurer les revues FEL, PAR et stage gates autour de livrables, responsabilités, validations et readiness clairement définis.",
-
-feature3_title:"Project controls",
-feature3_text:"Connecter budget, forecast, planning, jalons, avancement et ressources afin de comprendre la performance des projets dans leur contexte.",
-
-feature4_title:"Procurement & fournisseurs",
-feature4_text:"Maintenir la visibilité sur les activités d'achat critiques, les engagements fournisseurs, les livraisons et les interfaces engineering.",
-
-feature5_title:"Change, MOC & actions",
-feature5_text:"Connecter changements, MOC, actions, décisions et responsabilités plutôt que de les disperser dans différents trackers.",
-
-feature6_title:"Engineering readiness",
-feature6_text:"Maintenir la visibilité sur les documents d'ingénierie, livrables, interfaces et maturité de conception.",
-
-modules_title:"Une couche opérationnelle pour le portefeuille de projets",
-
-modules_intro:"L'objectif n'est pas de remplacer les systèmes spécialisés d'ingénierie ou les systèmes d'entreprise, mais de connecter les informations de management nécessaires au pilotage du portefeuille.",
-
-module1_title:"Gestion de portefeuille",
-module1_li1:"Tableaux de bord portefeuille",
-module1_li2:"Priorisation des projets",
-module1_li3:"Prévisions CAPEX",
-module1_li4:"RAG et attention managériale",
-
-module2_title:"Gouvernance projet",
-module2_li1:"Gouvernance FEL / PAR",
-module2_li2:"Readiness des stage gates",
-module2_li3:"Conformité des livrables",
-module2_li4:"Suivi des validations",
-
-module3_title:"Project controls",
-module3_li1:"Budget vs forecast",
-module3_li2:"Suivi des jalons",
-module3_li3:"Suivi de l'avancement",
-module3_li4:"Visibilité des ressources",
-
-module4_title:"Engineering & procurement",
-module4_li1:"Livrables d'ingénierie",
-module4_li2:"Suivi procurement",
-module4_li3:"Interfaces fournisseurs",
-module4_li4:"Readiness technique",
-
-module5_title:"Change & risques",
-module5_li1:"Lien avec les MOC",
-module5_li2:"Registres de risques",
-module5_li3:"Actions et décisions",
-module5_li4:"Responsabilités et échéances",
-
-module6_title:"Documentation & données",
-module6_li1:"Registres documentaires",
-module6_li2:"Visibilité des révisions",
-module6_li3:"Evidence projet",
-module6_li4:"Information projet centralisée",
-
-principles_title:"Principes d'engineering management",
-
-principles_intro:"CINCOMETRIC est façonné par des enseignements pratiques issus du project management, des project controls, de l'engineering management et de la réalisation de projets industriels.",
-
-principle1_title:"Commencer par le scope et la maturité du design",
-principle1_text:"Ne figer le scope que lorsque le front-end loading et les principales données de conception sont suffisamment matures. Des spécifications immatures génèrent du rework et des changements.",
-
-principle2_title:"Constituer la bonne équipe tôt",
-principle2_text:"Les rôles clés nécessitent une responsabilité claire et une implication précoce. Des responsabilités fragmentées créent retards et lacunes.",
-
-principle3_title:"Gérer les contrats de manière proactive",
-principle3_text:"Les contrats doivent être des outils de pilotage. Les écarts, interfaces et obligations doivent être suivis avant qu'ils ne deviennent des problèmes.",
-
-principle4_title:"Impliquer le procurement tôt",
-principle4_text:"Les aspects achats et fournisseurs doivent être intégrés dès les premières phases du projet, avec un suivi approprié.",
-
-principle5_title:"Clarifier responsabilités et interfaces",
-principle5_text:"Des responsabilités et interfaces claires entre disciplines, fournisseurs, équipes projet et opérations réduisent les lacunes, chevauchements et reworks.",
-
-principle6_title:"Traiter données, documents et communication comme des actifs projet",
-principle6_text:"L'information nécessite une responsabilité définie, des processus de changement disciplinés et une source commune de vérité.",
-
-principle7_title:"La sécurité et les opérations appartiennent au design",
-principle7_text:"HSE, opérations et maintenance doivent influencer tôt les décisions d'ingénierie et de conception, et non intervenir seulement en fin de projet.",
-
-principle8_title:"Construction et commissioning nécessitent des responsabilités claires",
-principle8_text:"Construction et démarrage ont des responsabilités différentes, mais doivent rester alignés grâce à un transfert structuré et au suivi des systèmes.",
-
-multisite_title:"D'un site unique à un portefeuille multi-sites",
-
-multisite_intro:"Le défi managérial change lorsque les projets sont répartis sur plusieurs usines ou business units. CINCOMETRIC est conçu en tenant compte de cette réalité.",
-
-site1_title:"Un site industriel",
-site1_text:"Maintenir une vision commune entre engineering, maintenance, operations, procurement et project controls sans créer une nouvelle couche de reporting déconnecté.",
-
-site2_title:"Plusieurs sites",
-site2_text:"Comparer l'état des projets, les priorités, les risques et les besoins en ressources entre différents sites tout en conservant la responsabilité locale.",
-
-site3_title:"Engineering management",
-site3_text:"Donner aux engineering managers et technical managers une couche de management pratique entre les équipes projet individuelles et l'organisation globale.",
-
-future_title:"Un produit construit à partir du terrain",
-
-future_text1:"CINCOMETRIC est un concept de produit futur. Il est développé à partir d'une expérience pratique des projets CAPEX industriels, de l'engineering management, des project controls et de la gestion de portefeuille.",
-
-future_text2:"L'objectif est volontairement pratique : permettre aux engineering managers et technical managers expérimentés de consacrer moins de temps à assembler l'information et davantage à gérer les projets, interfaces, décisions et risques importants.",
-
-future_text3:"Ce site constitue une première présentation du concept et une possibilité de suivre son développement.",
-
-cta_title:"Vous souhaitez suivre l'évolution de CINCOMETRIC ?",
-
-cta_text:"CINCOMETRIC est construit autour de problèmes réels d'engineering management. Si cette problématique vous est familière, contactez-nous et suivez le développement du produit.",
-
-cta_button:"Nous contacter",
-
-footer_tagline:"Gestion pratique des portefeuilles d'ingénierie pour les responsables techniques et engineering.",
-
-footer_product:"Produit",
-footer_focus:"Domaines",
-footer_focus1:"Engineering management",
-footer_focus2:"Project controls",
-footer_focus3:"Gestion de portefeuille",
-footer_focus4:"CAPEX industriel",
-footer_contact:"Contact",
-
-footer_bottom:"CINCOMETRIC — Gestion de portefeuille d'ingénierie, construite sur l'expérience."
-
-},
-
-
-de: {
-
-nav_about:"Über CINCOMETRIC",
-nav_features:"Funktionen",
-nav_principles:"Prinzipien",
-nav_future:"Zukünftiges Produkt",
-nav_contact:"Kontakt",
-
-hero_kicker:"Engineering Portfolio Management",
-
-hero_title:"Praxisnahe Steuerung komplexer Engineering-Projektportfolios.",
-
-hero_text:"CINCOMETRIC wird für Engineering Manager und Technical Manager entwickelt, die mehrere Projekte, Disziplinen und häufig mehrere Standorte steuern müssen — ohne den Überblick darüber zu verlieren, was tatsächlich Aufmerksamkeit benötigt.",
-
-hero_button:"Das Konzept entdecken",
-hero_button2:"Unsere Prinzipien",
-
-hero_card_title:"Aus Projekterfahrung entwickelt",
-
-hero_card_text:"Das Konzept basiert auf praktischer Erfahrung in Projektmanagement, Project Controls, Engineering Management und Portfoliomanagement.",
-
-audience_title:"Kein weiteres Reporting-Tool.",
-
-audience_text1:"CINCOMETRIC richtet sich an die Menschen, die Engineering-Portfolios tatsächlich voranbringen müssen: Engineering Manager, Technical Manager, Project Manager und Portfolioverantwortliche.",
-
-audience_text2:"Der Ansatz ist praxisorientiert: verstehen, was passiert, Abweichungen erkennen, Verantwortlichkeiten sichtbar machen und handeln, bevor aus kleinen Problemen grosse Projektprobleme werden.",
-
-audience_li1:"Ein Portfolio von CAPEX- und Engineering-Projekten steuern",
-audience_li2:"Projekte über einen oder mehrere Industriestandorte koordinieren",
-audience_li3:"Transparenz über Kosten, Termine, Readiness, Risiken und Aktionen behalten",
-audience_li4:"Engineering, Procurement, Project Controls und Operations verbinden",
-
-audience_card_title:"Entwickelt für die Realität des Engineering Managements",
-
-audience_card_text1:"Projekte scheitern selten, weil Informationen nicht existieren. Sie geraten in Schwierigkeiten, weil die richtigen Informationen fragmentiert, verspätet, unklar oder von Entscheidungen getrennt sind.",
-
-audience_card_text2:"CINCOMETRIC soll die Informationen, die für die Portfoliosteuerung benötigt werden, mit den Aktionen verbinden, die erforderlich sind, um Projekte voranzubringen.",
-
-features_title:"Eine gemeinsame Sicht auf das Engineering-Portfolio",
-
-features_intro:"Die zukünftige CINCOMETRIC-Plattform wird entwickelt, um die wesentlichen Informationen für Engineering Manager und Technical Manager in einer praktischen Arbeitsumgebung zusammenzuführen.",
-
-feature1_title:"Portfolio-Transparenz",
-feature1_text:"Projekte gemeinsam statt als isolierte Reports betrachten. Status, Prioritäten, Forecast, Risiken, Readiness und Managementaufmerksamkeit verstehen.",
-
-feature2_title:"Governance & Stage Gates",
-feature2_text:"FEL-, PAR- und Stage-Gate-Reviews anhand klarer Deliverables, Verantwortlichkeiten, Freigaben und Readiness strukturieren.",
-
-feature3_title:"Project Controls",
-feature3_text:"Budget, Forecast, Terminplan, Meilensteine, Fortschritt und Ressourcen verbinden, damit die Projektperformance im Kontext verstanden werden kann.",
-
-feature4_title:"Procurement & Lieferanten",
-feature4_text:"Kritische Beschaffungsvorgänge, Lieferantenverpflichtungen, Liefertermine und Engineering-Schnittstellen sichtbar halten.",
-
-feature5_title:"Change, MOC & Aktionen",
-feature5_text:"Änderungen, MOCs, Aktionen, Entscheidungen und Verantwortlichkeiten verbinden, statt sie in separaten Trackern verschwinden zu lassen.",
-
-feature6_title:"Engineering Readiness",
-feature6_text:"Transparenz über Engineering-Dokumente, Deliverables, Schnittstellen und Design-Maturity während der Projektentwicklung erhalten.",
-
-modules_title:"Eine praktische Managementebene für Projektportfolios",
-
-modules_intro:"Das Ziel ist nicht, spezialisierte Engineering- oder Enterprise-Systeme zu ersetzen, sondern die für die Portfoliosteuerung erforderlichen Managementinformationen miteinander zu verbinden.",
-
-module1_title:"Portfoliomanagement",
-module1_li1:"Portfolio-Dashboards",
-module1_li2:"Projektpriorisierung",
-module1_li3:"CAPEX-Forecast",
-module1_li4:"RAG und Managementaufmerksamkeit",
-
-module2_title:"Projekt-Governance",
-module2_li1:"FEL / PAR Governance",
-module2_li2:"Stage-Gate Readiness",
-module2_li3:"Deliverable Compliance",
-module2_li4:"Freigabeverfolgung",
-
-module3_title:"Project Controls",
-module3_li1:"Budget vs Forecast",
-module3_li2:"Meilensteinverfolgung",
-module3_li3:"Fortschrittsüberwachung",
-module3_li4:"Ressourcentransparenz",
-
-module4_title:"Engineering & Procurement",
-module4_li1:"Engineering Deliverables",
-module4_li2:"Procurement Follow-up",
-module4_li3:"Lieferantenschnittstellen",
-module4_li4:"Technische Readiness",
-
-module5_title:"Change & Risiko",
-module5_li1:"MOC-Verknüpfung",
-module5_li2:"Risikoregister",
-module5_li3:"Aktionen und Entscheidungen",
-module5_li4:"Verantwortlichkeiten und Termine",
-
-module6_title:"Dokumentation & Daten",
-module6_li1:"Dokumentenregister",
-module6_li2:"Revisionsübersicht",
-module6_li3:"Projekt-Nachweise",
-module6_li4:"Zentrale Projektinformationen",
-
-principles_title:"Prinzipien des Engineering Managements",
-
-principles_intro:"CINCOMETRIC wird durch praktische Erfahrungen aus Projektmanagement, Project Controls, Engineering Management und industrieller Projektabwicklung geprägt.",
-
-principle1_title:"Mit Scope und Design-Maturity beginnen",
-principle1_text:"Den Scope erst dann einfrieren, wenn Front-End Loading und wesentliche Design Inputs ausreichend ausgereift sind. Unreife Spezifikationen führen später zu Rework und Änderungen.",
-
-principle2_title:"Das richtige Team früh aufbauen",
-principle2_text:"Kernrollen benötigen klare Verantwortlichkeiten und eine frühe Einbindung. Fragmentierte Verantwortlichkeiten führen zu Verzögerungen und Lücken.",
-
-principle3_title:"Verträge proaktiv steuern",
-principle3_text:"Verträge sollten als Steuerungsinstrumente eingesetzt werden. Abweichungen, Schnittstellen und Verpflichtungen müssen aktiv verfolgt werden, bevor sie zu Problemen werden.",
-
-principle4_title:"Procurement früh einbinden",
-principle4_text:"Beschaffung und Lieferantenaspekte gehören von den frühen Projektphasen an ins Projekt, mit angemessener Lieferantensteuerung.",
-
-principle5_title:"Verantwortlichkeiten und Schnittstellen klar definieren",
-principle5_text:"Klare Verantwortlichkeiten und Schnittstellen zwischen Disziplinen, Lieferanten, Projektteams und Operations reduzieren Lücken, Überschneidungen und Rework.",
-
-principle6_title:"Daten, Dokumente und Kommunikation als Projektassets behandeln",
-principle6_text:"Informationen benötigen klare Verantwortlichkeiten, disziplinierte Change-Prozesse und eine gemeinsame Quelle der Wahrheit.",
-
-principle7_title:"Safety und Operations gehören ins Design",
-principle7_text:"HSE, Operations und Maintenance sollten früh Einfluss auf Engineering- und Designentscheidungen nehmen und nicht erst zu späten Stakeholdern werden.",
-
-principle8_title:"Construction und Commissioning benötigen klare Verantwortlichkeit",
-principle8_text:"Bau und Inbetriebnahme haben unterschiedliche Verantwortlichkeiten, müssen aber durch strukturierte Übergaben und Systemverfolgung aufeinander abgestimmt bleiben.",
-
-multisite_title:"Vom einzelnen Standort zum Multi-Site-Engineering-Portfolio",
-
-multisite_intro:"Die Managementherausforderung verändert sich, wenn Projekte über mehrere Werke oder Business Units verteilt sind. CINCOMETRIC wird mit dieser Realität im Hinterkopf entwickelt.",
-
-site1_title:"Ein Industriestandort",
-site1_text:"Eine gemeinsame Sicht auf Engineering, Maintenance, Operations, Procurement und Project Controls schaffen, ohne eine weitere Ebene isolierter Berichterstattung aufzubauen.",
-
-site2_title:"Mehrere Standorte",
-site2_text:"Projektstatus, Prioritäten, Risiken und Ressourcenanforderungen zwischen verschiedenen Standorten vergleichen und gleichzeitig die Verantwortung vor Ort erhalten.",
-
-site3_title:"Engineering Management",
-site3_text:"Engineering Manager und Technical Manager erhalten eine praktische Managementebene zwischen einzelnen Projektteams und der übergeordneten Organisation.",
-
-future_title:"Ein Produkt aus der Praxis",
-
-future_text1:"CINCOMETRIC ist ein zukünftiges Produktkonzept. Es wird aus praktischer Erfahrung mit industriellen CAPEX-Projekten, Engineering Management, Project Controls und Portfoliomanagement entwickelt.",
-
-future_text2:"Das Ziel ist bewusst praxisorientiert: Erfahrene Engineering Manager und Technical Manager sollen weniger Zeit mit dem Zusammenstellen von Informationen und mehr Zeit mit der Steuerung der wichtigen Projekte, Schnittstellen, Entscheidungen und Risiken verbringen.",
-
-future_text3:"Diese Website ist eine erste Vorstellung des Konzepts und eine Möglichkeit, seine Entwicklung zu verfolgen.",
-
-cta_title:"Sie möchten die Entwicklung von CINCOMETRIC verfolgen?",
-
-cta_text:"CINCOMETRIC entsteht rund um reale Herausforderungen des Engineering Managements. Wenn Sie diese Herausforderung kennen, nehmen Sie Kontakt auf und verfolgen Sie die Entwicklung des Produkts.",
-
-cta_button:"Kontakt aufnehmen",
-
-footer_tagline:"Praxisnahes Engineering-Portfoliomanagement für technische und Engineering-Verantwortliche.",
-
-footer_product:"Produkt",
-footer_focus:"Fokus",
-footer_focus1:"Engineering Management",
-footer_focus2:"Project Controls",
-footer_focus3:"Portfoliomanagement",
-footer_focus4:"Industrielles CAPEX",
-footer_contact:"Kontakt",
-
-footer_bottom:"CINCOMETRIC — Engineering-Portfoliomanagement aus der Praxis."
-
-}
-
-};
-
-
-/* =====================================================
-   LANGUAGE SWITCHER
-===================================================== */
-
-function setLanguage(language){
-
-    const dictionary = translations[language];
-
-    document.documentElement.lang = language;
-
-    document.querySelectorAll("[data-i18n]").forEach(element => {
-
-        const key = element.getAttribute("data-i18n");
-
-        if(dictionary[key]){
-            element.textContent = dictionary[key];
-        }
-
-    });
-
-    localStorage.setItem("cincometric-language", language);
-}
-
-
-document
-    .getElementById("languageSelect")
-    .addEventListener("change", function(){
-
-        setLanguage(this.value);
-
-    });
-
-
-/* Detect saved language */
-
-const savedLanguage =
-    localStorage.getItem("cincometric-language") || "en";
-
-document.getElementById("languageSelect").value = savedLanguage;
-
-setLanguage(savedLanguage);
-
-</script>
 
 
 </body>
